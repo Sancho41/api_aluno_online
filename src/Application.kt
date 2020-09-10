@@ -1,5 +1,6 @@
 package dev.panelinha
 
+import dev.panelinha.aonline.resources.routing
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
@@ -38,14 +39,7 @@ fun Application.module(testing: Boolean = false) {
     val client = HttpClient(Apache) {
     }
 
-    routing {
-        get("/") {
-            call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
-        }
-
-        get("/json/gson") {
-            call.respond(mapOf("hello" to "world"))
-        }
+    install (Routing) {
+        routing()
     }
 }
-
