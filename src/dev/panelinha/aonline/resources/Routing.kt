@@ -3,4 +3,5 @@ import io.ktor.routing.*
 
 fun Route.routing() {
     helloWorld()
+    academico()
 }
