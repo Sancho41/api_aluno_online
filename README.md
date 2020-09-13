@@ -5,4 +5,5 @@
 - Acadêmico/Horário de aulas - Vinícius
 - Academico/Atividades Complementares - Emanuel
 
+
 - Financeiro/Impressão de boleto
