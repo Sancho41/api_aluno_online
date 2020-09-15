@@ -26,4 +26,15 @@ class AcademicoDAO {
             materies
         }
     }
+
+    fun atvCompl(): List<Map<>> {
+        val auth = AuthDAO()
+        val loginCookies = auth.login(" ", " ")
+
+        val atividades = Jsoup.connect("http://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js")
+                .cookies(loginCookies)
+                .get()
+
+        //fazer adaptação para pegar o data e trazer informações das atividades
+    }
 }
