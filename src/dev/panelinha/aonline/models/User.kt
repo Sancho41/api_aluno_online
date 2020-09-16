@@ -1,9 +1,11 @@
-package dev.panelinha.dev.panelinha.models
+package dev.panelinha.aonline.models
 
-class User {
-    var nome: String? = null
-    var semestre: Int? = null
-    var matricula: String? = null
-    var senha: String? = null
-    var dataNascimento: String? = null
+class User(
+    var nome: String,
+    var matricula: String,
+    var curso: String,
+    var turno: String,
+    var sitacao: String
+) {
+    private lateinit var senha: String
 }

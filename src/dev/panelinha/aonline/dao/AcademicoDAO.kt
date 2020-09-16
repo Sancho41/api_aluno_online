@@ -27,7 +27,7 @@ class AcademicoDAO {
         }
     }
 
-    fun atvCompl(): List<Map<>> {
+    fun atvCompl()  {
         val auth = AuthDAO()
         val loginCookies = auth.login(" ", " ")
 

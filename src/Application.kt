@@ -1,6 +1,7 @@
 package dev.panelinha
 
-import dev.panelinha.aonline.resources.routing
+import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
+import dev.panelinha.dev.panelinha.aonline.routers.authRouting
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
@@ -39,7 +40,8 @@ fun Application.module(testing: Boolean = false) {
     val client = HttpClient(Apache) {
     }
 
-    install (Routing) {
-        routing()
+    routing {
+        authRouting()
+        academicoRouting()
     }
 }
