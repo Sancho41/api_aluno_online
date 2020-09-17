@@ -31,5 +31,14 @@ fun Route.academicoRouting() {
                 call.respond(mapOf("error" to "não foi possível encontrar nenhuma atividade complementar"))
             }
         }
+
+        get("/hora_aula") {
+            try {
+                val HorAulas = service.HorAulas()
+                call.respond(HorAulas)
+            } catch (e: Exception) {
+                call.respond(mapOf("error" to "não foi possível resgatar os horários das aulas"))
+            }
+        }
     }
 }

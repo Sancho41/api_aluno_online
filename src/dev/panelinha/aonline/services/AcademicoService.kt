@@ -8,4 +8,8 @@ class AcademicoService {
     fun boletim (): List<Map<String, String>> {
         return dao.boletim()
     }
+
+    fun HorAulas(): Map<String, List<Map<String, String>>> {
+        return dao.HorAulas()
+    }
 }

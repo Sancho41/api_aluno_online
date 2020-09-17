@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.dao
 
+import com.google.gson.GsonBuilder
 import org.jsoup.Jsoup
 
 class AcademicoDAO {
@@ -36,5 +37,40 @@ class AcademicoDAO {
                 .get()
 
         //fazer adaptação para pegar o data e trazer informações das atividades
+    }
+
+    fun HorAulas() : Map<String, List<Map<String, String>>> {
+        val auth = AuthDAO()
+        val loginCookies = auth.login(" ", " ")
+
+        val horario = Jsoup.connect("http://online.iesb.br/aonline/horario.asp")
+                .cookies(loginCookies)
+                .get()
+
+        val rows = horario.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(4) > tbody > tr")
+
+        val headers = rows[0].select("td").map { it.text() }
+
+        val horarios: MutableMap<String, MutableList<MutableMap<String, String>>> = mutableMapOf()
+
+        var lastDay = rows[1].text()
+        for (i in 2 until rows.size) {
+
+            val values = rows[i].select("td")
+            if (values.size == 1)
+                lastDay = rows[i].text()
+            else {
+                val materia: MutableMap<String, String> = mutableMapOf()
+                for ((index, head) in headers.withIndex()) {
+                    materia[head] = values[index].text()
+                }
+
+                if (horarios[lastDay] == null)
+                    horarios[lastDay] = arrayListOf()
+                horarios[lastDay]?.add(materia)
+            }
+        }
+
+        return horarios
     }
 }
