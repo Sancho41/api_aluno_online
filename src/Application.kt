@@ -2,6 +2,7 @@ package dev.panelinha
 
 import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
 import dev.panelinha.dev.panelinha.aonline.routers.authRouting
+import dev.panelinha.dev.panelinha.aonline.routers.servicoRouting
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
@@ -43,5 +44,6 @@ fun Application.module(testing: Boolean = false) {
     routing {
         authRouting()
         academicoRouting()
+        servicoRouting()
     }
 }
