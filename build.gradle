@@ -8,6 +8,12 @@ buildscript {
     }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
@@ -40,6 +46,9 @@ dependencies {
     implementation "io.ktor:ktor-client-core-jvm:$ktor_version"
     implementation "io.ktor:ktor-client-apache:$ktor_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+
+    compile group: 'org.litote.kmongo', name: 'kmongo', version: '4.1.2'
+
 
     compile group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 

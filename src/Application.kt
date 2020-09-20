@@ -1,5 +1,8 @@
 package dev.panelinha
 
+import dev.panelinha.aonline.dao.AuthDAO
+import dev.panelinha.aonline.models.User
+import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
 import dev.panelinha.dev.panelinha.aonline.routers.authRouting
 import dev.panelinha.dev.panelinha.aonline.routers.servicoRouting
@@ -10,6 +13,7 @@ import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.auth.*
+import io.ktor.auth.jwt.jwt
 import io.ktor.gson.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
@@ -31,12 +35,27 @@ fun Application.module(testing: Boolean = false) {
     }
 
     install(Authentication) {
+        jwt {
+            verifier(JwtConfig.verifier)
+            realm = "dev.panelinha"
+            validate {
+                val matricula = it.payload.getClaim("matricula").asString()
+                if (matricula != null) {
+                    val authDAO = AuthDAO()
+                    authDAO.loginByMatricula(matricula)
+                }
+                else null
+            }
+        }
     }
 
     install(ContentNegotiation) {
         gson {
+            setPrettyPrinting()
         }
     }
+
+    install(CallLogging)
 
     val client = HttpClient(Apache) {
     }

@@ -1,12 +1,13 @@
 package dev.panelinha.aonline.dao
 
 import com.google.gson.GsonBuilder
+import dev.panelinha.aonline.models.User
 import org.jsoup.Jsoup
 
 class AcademicoDAO {
-    fun boletim(): List<Map<String, String>> {
+    fun boletim(user: User): List<Map<String, String>> {
         val auth = AuthDAO()
-        val loginCookies = auth.login(" ", " ")
+        val loginCookies = auth.getCookies(user.matricula, user.senha)
 
         val boletim = Jsoup.connect("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp")
             .cookies(loginCookies)
@@ -28,9 +29,9 @@ class AcademicoDAO {
         }
     }
 
-    fun atvCompl()  {
+    fun atvCompl(user: User)  {
         val auth = AuthDAO()
-        val loginCookies = auth.login(" ", " ")
+        val loginCookies = auth.getCookies(user.matricula, user.senha)
 
         val atividades = Jsoup.connect("http://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js")
                 .cookies(loginCookies)
@@ -39,9 +40,9 @@ class AcademicoDAO {
         //fazer adaptação para pegar o data e trazer informações das atividades
     }
 
-    fun HorAulas() : Map<String, List<Map<String, String>>> {
+    fun horaAulas(user: User) : Map<String, List<Map<String, String>>> {
         val auth = AuthDAO()
-        val loginCookies = auth.login(" ", " ")
+        val loginCookies = auth.getCookies(user.matricula, user.senha)
 
         val horario = Jsoup.connect("http://online.iesb.br/aonline/horario.asp")
                 .cookies(loginCookies)

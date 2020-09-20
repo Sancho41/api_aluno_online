@@ -1,14 +1,20 @@
 package dev.panelinha.dev.panelinha.aonline
 
+import dev.panelinha.aonline.dao.AuthDAO
 import org.jsoup.Connection
 import org.jsoup.Jsoup
+import org.litote.kmongo.KMongo
+import org.litote.kmongo.getCollection
 
 fun main () {
-    val login = Jsoup.connect("http://online.iesb.br/aonline/middle_logon.asp")
-        .data("txtnumero_matricula", "")
-        .data("txtsenha_tac", "MinhaSenha")
-        .method(Connection.Method.POST)
-        .execute()
+// matricula
+// senha
 
-    val authCookies = login.cookies()
+// nome
+// curso
+// turno
+// sitacao
+
+    val dao = AuthDAO()
+    val cookies = dao.getCookies("1712130049", "Tanchu_41")
 }
