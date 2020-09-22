@@ -3,6 +3,7 @@ package dev.panelinha.dev.panelinha.aonline.routers
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.AcademicoService
 import dev.panelinha.dev.panelinha.aonline.utils.ApiPaths
+import dev.panelinha.dev.panelinha.aonline.utils.LoggerBuilder
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal

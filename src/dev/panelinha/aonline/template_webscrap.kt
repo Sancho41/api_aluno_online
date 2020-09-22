@@ -16,5 +16,5 @@ fun main () {
 // sitacao
 
     val dao = AuthDAO()
-    val cookies = dao.getCookies("1712130049", "Tanchu_41")
+    val cookies = dao.getCookies("1712130049", " ")
 }

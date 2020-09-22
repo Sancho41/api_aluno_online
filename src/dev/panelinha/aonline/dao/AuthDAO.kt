@@ -36,8 +36,14 @@ class AuthDAO {
 
         val collection = db.getCollection<User>()
 
-        return collection.findOne(User::matricula eq loginUserDTO.matricula)
+        val user = collection.findOne(User::matricula eq loginUserDTO.matricula)
             ?: register(loginUserDTO, cookies)
+
+        user.senha = loginUserDTO.senha
+
+        collection.updateOne(User::matricula eq loginUserDTO.matricula, user)
+
+        return user
     }
 
     private fun register(loginUserDTO: LoginUserDTO, cookies: Map<String, String>): User {
