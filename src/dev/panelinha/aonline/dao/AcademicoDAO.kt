@@ -38,6 +38,8 @@ class AcademicoDAO {
                 .get()
 
         //fazer adaptação para pegar o data e trazer informações das atividades
+        //val atvDisponiveis = atividades
+        //        .select("#nav nav-tabs list-unstyled components > li > a") nao sei se é melhor pegar a DATA ou pegar direto as colunas
     }
 
     fun horaAulas(user: User) : Map<String, List<Map<String, String>>> {
