@@ -22,11 +22,27 @@ fun main () {
     val extrato = Jsoup.connect("http://online.iesb.br/aonline/historico.asp")
         .cookies(cookies)
         .get()
-    val rows = extrato.select("#ctnTabPagina2 > table > tbody > tr > td > table > tbody > tr")
-    val informacoes = rows.filter{!it.select("td")[0].hasAttr("colspan")}.map{it.text()}
 
-    println(informacoes)
+    val rows = extrato.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > table > tbody > tr")
+
+    val info = rows.map{ it.text() }
+
+   var i : Int = 0
+
+    println("\n")
+
+    info.forEach{
+        println(info[i])
+        i = i + 1
+    }
+
 
 
 
 }
+
+
+
+
+
+
