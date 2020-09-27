@@ -4,15 +4,10 @@ import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.aonline.models.User
 import org.jsoup.Jsoup
 
-class ServicoDAO {
-
+class ServicoDAO: PageDAO() {
     fun agendamentos(user: User): List<Map<String, String>>{
 
-        val auth = AuthDAO()
-        val loginCookies = auth.getCookies(user)
-
-        val atendimento = Jsoup.connect("http://apps.iesb.br/atendimentoagendado/atendimento/newatendimento")
-                .cookies(loginCookies)
+        val atendimento = getConnection("http://apps.iesb.br/atendimentoagendado/atendimento/newatendimento", user)
                 .data("tipo", "aluno")
                 .data("categoria", "")
                 .data("codigo", "UU8wQURNekVqTXhjVE0")
