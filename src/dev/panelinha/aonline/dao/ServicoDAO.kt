@@ -18,7 +18,13 @@ class ServicoDAO {
                 .data("codigo", "UU8wQURNekVqTXhjVE0")
                 .post()
 
-        val headers = atendimento.select("#home .classdatatable > thead > tr > th").map{ if (it.text() != "") it.text() else "actions"  }
+        val headers = atendimento
+            .select("#home .classdatatable > thead > tr > th")
+            .map{
+                if (it.text() != "")
+                    it.text()
+                else "actions"
+            }
 
         val rows = atendimento.select("#home .classdatatable > tbody > tr")
 

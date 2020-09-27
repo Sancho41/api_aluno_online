@@ -1,22 +1,23 @@
 package dev.panelinha.aonline.models
 
+import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
 import io.ktor.auth.Principal
 
-class User(
-    var nome: String,
-    var matricula: String,
-    var curso: String,
-    var turno: String,
-    var sitacao: String,
+class User: Principal {
+    var login: String
     var senha: String
-): Principal {
-    override fun toString(): String {
-        return """
-            nome: $nome,
-            matricula: $matricula,
-            curso: $curso,
-            turno: $turno,
-            situacao: $sitacao,
-        """.trimIndent()
+    var isAdmin: Boolean = false
+    var matricula: String? = null
+    var senhaAO: String? = null
+
+    constructor(registerDTO: RegisterDTO) {
+        this.login = registerDTO.login;
+        this.senha = registerDTO.senha;
+        if (registerDTO.matricula != null) this.matricula = registerDTO.matricula
+        if (registerDTO.senhaAO != null) this.senhaAO = registerDTO.senhaAO
+    }
+
+    fun vericaSenha(senha: String): Boolean {
+        return this.senha == senha
     }
 }

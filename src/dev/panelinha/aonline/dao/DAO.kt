@@ -5,7 +5,7 @@ import com.mongodb.client.MongoDatabase
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.getCollection
 
-class DAO {
+open class DAO {
     val database: MongoDatabase
     init {
         val client = KMongo.createClient("mongodb+srv://panelinha:panelinha123@cluster0.1xdse.mongodb.net")

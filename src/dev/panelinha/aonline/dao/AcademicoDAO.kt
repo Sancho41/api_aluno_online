@@ -2,16 +2,13 @@ package dev.panelinha.aonline.dao
 
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
+import dev.panelinha.dev.panelinha.aonline.dao.PageDAO
+import org.jsoup.Connection
 import org.jsoup.Jsoup
 
-class AcademicoDAO {
+class AcademicoDAO: PageDAO() {
     fun boletim(user: User): List<Map<String, String>> {
-        val auth = AuthDAO()
-        val loginCookies = auth.getCookies(user.matricula, user.senha)
-
-        val boletim = Jsoup.connect("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp")
-            .cookies(loginCookies)
-            .get()
+        val boletim = getConnection("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp", user).get()
 
         val headers = boletim
             .select("#Open_Text_General > thead > tr:nth-child(2) > th")
@@ -30,12 +27,10 @@ class AcademicoDAO {
     }
 
     fun atvCompl(user: User)  {
-        val auth = AuthDAO()
-        val loginCookies = auth.getCookies(user.matricula, user.senha)
-
-        val atividades = Jsoup.connect("http://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js")
-                .cookies(loginCookies)
-                .get()
+        val atividades = getConnection(
+            "https://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js",
+            user
+        ).get()
 
         //fazer adaptação para pegar o data e trazer informações das atividades
         //val atvDisponiveis = atividades
@@ -43,12 +38,7 @@ class AcademicoDAO {
     }
 
     fun horaAulas(user: User) : Map<String, List<Map<String, String>>> {
-        val auth = AuthDAO()
-        val loginCookies = auth.getCookies(user.matricula, user.senha)
-
-        val horario = Jsoup.connect("http://online.iesb.br/aonline/horario.asp")
-                .cookies(loginCookies)
-                .get()
+        val horario = getConnection("http://online.iesb.br/aonline/horario.asp", user).get()
 
         val rows = horario.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(4) > tbody > tr")
 

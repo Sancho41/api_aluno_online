@@ -1,14 +1,11 @@
 package dev.panelinha
 
 import dev.panelinha.aonline.dao.AuthDAO
-import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
 import dev.panelinha.dev.panelinha.aonline.routers.authRouting
 import dev.panelinha.dev.panelinha.aonline.routers.servicoRouting
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.http.*
@@ -29,7 +26,6 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
-        header("MyCustomHeader")
         allowCredentials = true
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
@@ -39,10 +35,10 @@ fun Application.module(testing: Boolean = false) {
             verifier(JwtConfig.verifier)
             realm = "dev.panelinha"
             validate {
-                val matricula = it.payload.getClaim("matricula").asString()
-                if (matricula != null) {
+                val login = it.payload.getClaim("login").asString()
+                if (login != null) {
                     val authDAO = AuthDAO()
-                    authDAO.loginByMatricula(matricula)
+                    authDAO.getUserByLogin(login)
                 }
                 else null
             }
