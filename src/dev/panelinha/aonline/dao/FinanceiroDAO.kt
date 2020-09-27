@@ -14,6 +14,23 @@ class FinanceiroDAO: PageDAO() {
                 .post()
 
         return listOf()
-        //val headers = adaptação para extrato
+        val headers = extrato
+                .select("#ctnTabPagina2 > table > tbody > tr > td")
+                .map{
+                    if (it.text() != "")
+                    it.text()
+                    else "actions"
+                }
+
+        val rows = extrato.select("#ctnTabPagina2 > table > tbody > tr")
+
+        return rows.map {
+            val requerimentos: MutableMap<String, String> = mutableMapOf()
+            val row = it.select("td")
+            for((index, head) in headers.withIndex())
+                requerimentos[head] = row[index].text()
+            requerimentos
+
+        }
     }
 }
