@@ -73,12 +73,22 @@ class AcademicoDAO: PageDAO() {
 
         val rows = historicoAcad.select("#ctnTabPagina2 > table > tbody > tr > td > table > tr")
 
-        val informacoes = rows.filter{!it.select("td")[0].hasAttr("colspan")}.map{it.text()}
+        val info = rows.filter { !it.hasAttr("colspan") }.map { it.text() }
 
-        return informacoes
+        val infoMap: MutableMap<String, String> = mutableMapOf<String, String>()
+
+        info.forEach {
+            val listChaveValor = it.split(":")
+            if (listChaveValor.size >= 2) {
+                val (chave, valor) = listChaveValor
+                infoMap[chave] = valor
+            }
+        }
+
+        return infoMap
     }
 
-    fun historicoAcadDisciplinaCursada(user: User) : List<Map<String, String>> {
+    //fun historicoAcadDisciplinaCursada(user: User) : List<Map<String, String>> {
 
 
 
