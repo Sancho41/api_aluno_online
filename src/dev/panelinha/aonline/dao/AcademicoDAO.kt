@@ -66,4 +66,22 @@ class AcademicoDAO: PageDAO() {
 
         return horarios
     }
+
+    fun historicoAcad(user: User) : Map<String, String> {
+
+        val historicoAcad = getConnection("http://online.iesb.br/aonline/historico.asp", user).get()
+
+        val rows = historicoAcad.select("#ctnTabPagina2 > table > tbody > tr > td > table > tr")
+
+        val informacoes = rows.filter{!it.select("td")[0].hasAttr("colspan")}.map{it.text()}
+
+        return informacoes
+    }
+
+    fun historicoAcadDisciplinaCursada(user: User) : List<Map<String, String>> {
+
+
+
+    }
+
 }
