@@ -18,13 +18,13 @@ fun main () {
 // sitacao
 
     val dao = AuthDAO()
-    val cookies = dao.getCookies("1912130015", "27062001")
+    val cookies = dao.getCookies("1912130054", "05092000")
 
     val historico = Jsoup.connect("http://online.iesb.br/aonline/historico.asp")
         .cookies(cookies)
         .get()
 
-    val rows = historico.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > b > b > table > tbody > tr")
+    val rows = historico.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > b > b > b > b > table > tbody > tr")
 
     val headers = rows[0].select("td").map { it.text() }
 
