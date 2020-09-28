@@ -1,5 +1,6 @@
 package dev.panelinha.dev.panelinha.aonline
 
+import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.aonline.models.User
 import org.jsoup.Connection
@@ -19,24 +20,35 @@ fun main () {
     val dao = AuthDAO()
     val cookies = dao.getCookies("1912130015", "27062001")
 
-    val extrato = Jsoup.connect("http://online.iesb.br/aonline/historico.asp")
+    val historico = Jsoup.connect("http://online.iesb.br/aonline/historico.asp")
         .cookies(cookies)
         .get()
 
-    val rows = extrato.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > table > tbody > tr")
+    val rows = historico.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > table > tbody > tr")
 
-    val info = rows.map{ it.text() }
+    val headers = rows[0].select("td").map { it.text() }
 
-   var i : Int = 0
+    val materias = mutableListOf<Map<String, String>>()
 
-    println("\n")
+    for(i in 1 until (rows.size - 1)){
 
-    info.forEach{
-        println(info[i])
-        i = i + 1
+        val row = rows[i].select("td")
+
+        if(row.size == headers.size){
+            val materia = mutableMapOf<String, String>()
+
+            for((index, valor) in headers.withIndex()){
+                materia[valor] = row[index].text()
+            }
+
+            materias.add(materia)
+        }
     }
 
+ val gson = GsonBuilder().setPrettyPrinting().create()
+    val json = gson.toJson(materias)
 
+println(json)
 
 
 }

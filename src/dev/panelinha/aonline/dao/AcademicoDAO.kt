@@ -11,11 +11,11 @@ class AcademicoDAO: PageDAO() {
         val boletim = getConnection("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp", user).get()
 
         val headers = boletim
-            .select("#Open_Text_General > thead > tr:nth-child(2) > th")
-            .map { it.text() }
+                .select("#Open_Text_General > thead > tr:nth-child(2) > th")
+                .map { it.text() }
 
         val rows = boletim
-            .select("#Open_Text_General > tbody > tr")
+                .select("#Open_Text_General > tbody > tr")
 
         return rows.map {
             val materies: MutableMap<String, String> = mutableMapOf()
@@ -26,10 +26,10 @@ class AcademicoDAO: PageDAO() {
         }
     }
 
-    fun atvCompl(user: User)  {
+    fun atvCompl(user: User) {
         val atividades = getConnection(
-            "https://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js",
-            user
+                "https://apps.iesb.br/sistemasAcademicos/application/modules/aonline/views/atividadesComplementares/js/atividades-complementares.js",
+                user
         ).get()
 
         //fazer adaptação para pegar o data e trazer informações das atividades
@@ -37,7 +37,7 @@ class AcademicoDAO: PageDAO() {
         //        .select("#nav nav-tabs list-unstyled components > li > a") nao sei se é melhor pegar a DATA ou pegar direto as colunas
     }
 
-    fun horaAulas(user: User) : Map<String, List<Map<String, String>>> {
+    fun horaAulas(user: User): Map<String, List<Map<String, String>>> {
         val horario = getConnection("http://online.iesb.br/aonline/horario.asp", user).get()
 
         val rows = horario.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(4) > tbody > tr")
@@ -67,7 +67,7 @@ class AcademicoDAO: PageDAO() {
         return horarios
     }
 
-    fun historicoAcad(user: User) : Map<String, String> {
+    fun historicoAcad(user: User): Map<String, String> {
 
         val historicoAcad = getConnection("http://online.iesb.br/aonline/historico.asp", user).get()
 
@@ -88,23 +88,34 @@ class AcademicoDAO: PageDAO() {
         return infoMap
     }
 
-    fun historicoAcadDisciplinaCursada(user: User) : List<Map<String, String>> {
+    fun historicoAcadDisciplinaCursada(user: User): List<Map<String, String>> {
 
         val historicoAcadDisciplinaCursada = getConnection("http://online.iesb.br/aonline/historico.asp", user).get()
 
         val rows = historicoAcadDisciplinaCursada.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > table > tbody > tr")
 
-        val info = rows.map{ it.text() }
+        val headers = rows[0].select("td").map { it.text() }
 
-        var i : Int = 0
+        val materias = mutableListOf<Map<String, String>>()
 
-        println("\n")
+        for (i in 1 until (rows.size - 1)) {
 
-        info.forEach{
-            println(info[i])
-            i = i + 1
+            val row = rows[i].select("td")
+
+            if (row.size == headers.size) {
+                val materia = mutableMapOf<String, String>()
+
+                for ((index, valor) in headers.withIndex()) {
+                    materia[valor] = row[index].text()
+                }
+
+                materias.add(materia)
+            }
         }
+
+        return(materias)
 
     }
 
 }
+
