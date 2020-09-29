@@ -2,7 +2,8 @@ package dev.panelinha.dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasCursadasDAO
-import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasMatriculasdasDAO
+import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasMatriculadasDAO
+import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasPendentesDAO
 
 class HistoricoService {
     fun disciplinasCursadas(user: User): List<Map<String, String>> {
@@ -11,7 +12,7 @@ class HistoricoService {
     }
 
     fun disciplinasMatriculadas(user: User): List<Map<String, String>> {
-        val dao = DisciplinasMatriculasdasDAO(user)
+        val dao = DisciplinasMatriculadasDAO(user)
         return dao.getTable()
     }
 }
