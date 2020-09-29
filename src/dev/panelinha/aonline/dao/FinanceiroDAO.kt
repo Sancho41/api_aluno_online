@@ -3,34 +3,36 @@ package dev.panelinha.dev.panelinha.aonline.dao
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.aonline.models.User
+import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
 import org.jsoup.Jsoup
 
 class FinanceiroDAO: PageDAO() {
-    fun extratoFin(user: User): List<Any>{
+    fun extratoFin(user: User, extratoDTO: ExtratoDTO): List<Any>{
 
         val extrato = getConnection("http://online.iesb.br/aonline/extrato_financeiro.asp", user)
-                .data("dataIni", "01/01/2019")
-                .data("dataFim", "26/01/2020")
+                .data("dt_ini", extratoDTO.dataIni)
+                .data("dt_fim", extratoDTO.dataFim)
                 .post()
 
-        return listOf()
-        val headers = extrato
-                .select("#ctnTabPagina2 > table > tbody > tr > td")
-                .map{
-                    if (it.text() != "")
-                    it.text()
-                    else "actions"
-                }
+        val table = extrato
+                .select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(6) > tbody > tr")
 
-        val rows = extrato.select("#ctnTabPagina2 > table > tbody > tr")
+        val headers = table[1].select("td").map{ it.text() }
 
-        return rows.map {
-            val requerimentos: MutableMap<String, String> = mutableMapOf()
-            val row = it.select("td")
-            for((index, head) in headers.withIndex())
-                requerimentos[head] = row[index].text()
-            requerimentos
+        val mensalidades = mutableListOf<Map<String, String>>()
+
+        for (i:Int in 3 until table.size){
+            val row = table[i].select("td")
+            if(row.size != headers.size) break
+
+            val newRow = mutableMapOf<String, String>()
+            for ((index:Int, valor:String) in headers.withIndex()){
+                newRow[valor] = row[index].text()
+            }
+            mensalidades.add(newRow)
 
         }
+
+        return mensalidades
     }
 }

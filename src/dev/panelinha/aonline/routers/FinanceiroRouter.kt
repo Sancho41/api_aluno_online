@@ -17,12 +17,18 @@ import io.ktor.routing.route
 fun Route.financeiroRouter() {
     val service = FinanceiroService()
 
-    route(ApiPaths.AUTH) {
-        post <ExtratoDTO>("/extratoFinanceiro") {
-            try {
+    authenticate {
 
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.Forbidden, e)
+
+        route(ApiPaths.FINANCEIRO) {
+            post<ExtratoDTO>("/extrato-financeiro") {
+                try {
+                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val extrato = service.extratoFin(user, it)
+                    call.respond(HttpStatusCode.OK, extrato)
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.Forbidden, e)
+                }
             }
         }
     }

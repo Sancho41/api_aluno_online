@@ -2,10 +2,7 @@ package dev.panelinha
 
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
-import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
-import dev.panelinha.dev.panelinha.aonline.routers.authRouting
-import dev.panelinha.dev.panelinha.aonline.routers.historicoRouting
-import dev.panelinha.dev.panelinha.aonline.routers.servicoRouting
+import dev.panelinha.dev.panelinha.aonline.routers.*
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.routing.*
@@ -62,5 +59,6 @@ fun Application.module(testing: Boolean = false) {
         academicoRouting()
         servicoRouting()
         historicoRouting()
+        financeiroRouter()
     }
 }

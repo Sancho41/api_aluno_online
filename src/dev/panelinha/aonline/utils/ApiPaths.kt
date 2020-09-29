@@ -5,5 +5,6 @@ object ApiPaths {
     const val ACADEMICO = "/api/academico"
     const val SERVICO = "/api/servico"
     const val HISTORICO = "/api/historico"
+    const val FINANCEIRO = "/api/financeiro"
 }
 
