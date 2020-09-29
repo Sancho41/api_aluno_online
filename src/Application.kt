@@ -4,6 +4,7 @@ import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.dev.panelinha.aonline.routers.academicoRouting
 import dev.panelinha.dev.panelinha.aonline.routers.authRouting
+import dev.panelinha.dev.panelinha.aonline.routers.historicoRouting
 import dev.panelinha.dev.panelinha.aonline.routers.servicoRouting
 import io.ktor.application.*
 import io.ktor.features.*
@@ -60,5 +61,6 @@ fun Application.module(testing: Boolean = false) {
         authRouting()
         academicoRouting()
         servicoRouting()
+        historicoRouting()
     }
 }

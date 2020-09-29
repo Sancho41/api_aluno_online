@@ -88,35 +88,6 @@ class AcademicoDAO: PageDAO() {
         return infoMap
     }
 
-    fun historicoAcadDisciplinaCursada(user: User): List<Map<String, String>> {
-
-        val historicoAcadDisciplinaCursada = getConnection("http://online.iesb.br/aonline/historico.asp", user).get()
-
-        val rows = historicoAcadDisciplinaCursada.select("#ctnTabPagina2 > table > tbody > tr > td > b > b > table > tbody > tr")
-
-        val headers = rows[0].select("td").map { it.text() }
-
-        val materias = mutableListOf<Map<String, String>>()
-
-        for (i in 1 until (rows.size - 1)) {
-
-            val row = rows[i].select("td")
-
-            if (row.size == headers.size) {
-                val materia = mutableMapOf<String, String>()
-
-                for ((index, valor) in headers.withIndex()) {
-                    materia[valor] = row[index].text()
-                }
-
-                materias.add(materia)
-            }
-        }
-
-        return(materias)
-
-    }
-
     fun historicoAcadDisciplinasMatriculadas(user: User): List<Map<String, String>>{
 
         val historicoAcadDisciplinasMatriculadas = getConnection("http://online.iesb.br/aonline/historico.asp", user).get()
