@@ -8,7 +8,7 @@ import org.jsoup.select.Elements
 open class HistoricoPageDAO(user: User, seletorTabela: String) : PageDAO() {
     private val connectionUrl: String = "http://online.iesb.br/aonline/historico.asp"
     private val page: Document
-    private val tabela: Elements
+    protected val tabela: Elements
 
     init {
         this.page = getConnection(connectionUrl, user).get()
