@@ -15,4 +15,9 @@ class HistoricoService {
         val dao = DisciplinasMatriculadasDAO(user)
         return dao.getTable()
     }
+
+    fun disciplinasPendentes(user: User): List<Map<String, String>> {
+        val dao = DisciplinasPendentesDAO(user)
+        return dao.getTable()
+    }
 }

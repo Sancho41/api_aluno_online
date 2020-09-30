@@ -35,6 +35,15 @@ fun Route.historicoRouting() {
                     call.respond(HttpStatusCode.BadRequest)
                 }
             }
+
+            get("disciplinas-pendentes") {
+                try {
+                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    call.respond(service.disciplinasPendentes(user))
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
         }
     }
 }
