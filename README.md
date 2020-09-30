@@ -6,26 +6,32 @@ Este trabalho tem como objetivo a criação de uma api para o sistema interno de
 
 ---
 
-# Implementação de recursos
+# Implementação de recursos Aluno Online
 ### Autenticação:
-    - [X] Registro de usuário
-    - [X] Login de usuário
-    - [X] Atualização de usuário
+- [X] Registro de usuário
+- [X] Login de usuário
+- [X] Atualização de usuário
 
 ### Acadêmico
-    - [X] Boletim
-    - [X] Horário de Aulas
+- [X] Boletim
+- [X] Horário de Aulas
 
 ### Serviços
-    - [X] Histórico de agendamentos
+- [X] Histórico de agendamentos
 
 ### Histórico Acadêmico
-    - [X] Disciplinas Cursadas
-    - [X] Disciplinas Matriculadas
-    - [ ] Disciplinas Cursadas
-    - [ ] Disciplinas Fora da Grade
-    - [ ] Atividades Complementares
+- [X] Disciplinas Cursadas
+- [X] Disciplinas Matriculadas
+- [ ] Disciplinas Cursadas
+- [ ] Disciplinas Fora da Grade
+- [ ] Atividades Complementares
     
 ### Financeiro
-    - [X] Extrato Financeiro (Período)
-    - [ ] Impressão de Boleto
+- [X] Extrato Financeiro (Período)
+- [ ] Impressão de Boleto
+
+---
+
+# Outros Recursos
+- [ ] Rotas de administrador
+    - [ ] Gerênciar usuários 
