@@ -16,6 +16,12 @@ class User(registerDTO: RegisterDTO) : Principal {
     }
 
     fun vericaSenha(senha: String): Boolean {
+        // TODO: Validação de senha
         return this.senha == senha
+    }
+
+    fun getSenha(): String {
+        // TODO: Criptografia de senha
+        return senha
     }
 }
