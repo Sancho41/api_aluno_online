@@ -1,13 +1,31 @@
-# Recursos a serem implementados
+# Api para o Aluno Online
+[Link para a documentação da API](Lhttps://documenter.getpostman.com/view/10262250/TVRd9rHt)
 
-- [X] Academico/Boletim - **Gabriel**
-- [X] Serviços/Atendimento agendado - **Raul**
-- [X] Acadêmico/Horário de aulas - **Vinícius**
-- [ ] Academico/Atividades Complementares - **Emanuel**
+## Objetivo
+Este trabalho tem como objetivo a criação de uma api para o sistema interno de alunos do IESB, para automatizações e facilitar acesso aos dados. Utilizamos Webscraping para a retirada de informações do sistema.
 
 ---
 
-- [ ] Financeiro/Impressão de boleto - **Gabriel**
-- [ ] Acadêmico/Histórico Academico - **Vinícius/Raul**
-- [ ] Financeiro/Extrato - **Emanuel**
+# Implementação de recursos
+### Autenticação:
+    - [X] Registro de usuário
+    - [X] Login de usuário
+    - [X] Atualização de usuário
 
+### Acadêmico
+    - [X] Boletim
+    - [X] Horário de Aulas
+
+### Serviços
+    - [X] Histórico de agendamentos
+
+### Histórico Acadêmico
+    - [X] Disciplinas Cursadas
+    - [X] Disciplinas Matriculadas
+    - [ ] Disciplinas Cursadas
+    - [ ] Disciplinas Fora da Grade
+    - [ ] Atividades Complementares
+    
+### Financeiro
+    - [X] Extrato Financeiro (Período)
+    - [ ] Impressão de Boleto
