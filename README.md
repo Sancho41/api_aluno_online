@@ -35,3 +35,4 @@ Este trabalho tem como objetivo a criação de uma api para o sistema interno de
 # Outros Recursos
 - [ ] Rotas de administrador
     - [ ] Gerênciar usuários 
+- [ ] Criptografia de senha no banco de dados
