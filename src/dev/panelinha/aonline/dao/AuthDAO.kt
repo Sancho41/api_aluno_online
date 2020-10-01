@@ -44,43 +44,6 @@ class AuthDAO: DAO() {
         return user
     }
 
-//    private fun register(loginUserDTO: LoginUserDTO, cookies: Map<String, String>): User {
-//
-//        val info = Jsoup.connect("http://online.iesb.br/aonline/dados_do_aluno.asp")
-//            .cookies(cookies)
-//            .get()
-//
-//        val nome = info.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(1) > tbody > tr:nth-child(2) > td.font01")
-//            .text()
-//
-//        val cursoInfo = info.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(1) > tbody > tr:nth-child(29) > td:nth-child(2)")
-//            .text()
-//        val cursoRegex = "(?:Curso: )(.+)".toRegex()
-//        val (curso) = cursoRegex.find(cursoInfo)!!.destructured
-//
-//        val turnoInfo = info.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(1) > tbody > tr:nth-child(29) > td:nth-child(3)")
-//            .text()
-//        val turnoRegex = "(?:Turno: )(.+)".toRegex()
-//        val (turno) = turnoRegex.find(turnoInfo)!!.destructured
-//
-//        val situacaoInfo = info.select("#ctnTabPagina2 > table > tbody > tr > td > table:nth-child(1) > tbody > tr:nth-child(30) > td:nth-child(3)")
-//            .text()
-//        val situacaoRegex = "(?:Situação: )(.+)".toRegex()
-//        val (situacao) = situacaoRegex.find(situacaoInfo)!!.destructured
-//
-//        val user = User(nome, loginUserDTO.matricula, curso, turno, situacao, loginUserDTO.senha)
-//
-//        try {
-//            val col = db.getCollection<User>()
-//            col.insertOne(user)
-//            return user
-//        } catch (e: MongoWriteException) {
-//            if (e.code == 11000)
-//                throw Exception("Usuário já registrado.")
-//            throw e
-//        }
-//    }
-
     fun register(registerDTO: RegisterDTO): User {
         val user = User(registerDTO)
         try {

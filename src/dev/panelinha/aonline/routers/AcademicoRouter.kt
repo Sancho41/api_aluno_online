@@ -48,19 +48,6 @@ fun Route.academicoRouting() {
                     call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível resgatar os horários das aulas"))
                 }
             }
-
-            get("/historico_academico") {
-                try{
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
-                    //val historicoAcad = service.historicoAcad(user)
-                    //call.respond(historicoAcad)
-                } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível resgatar o histórico acadêmico"))
-                }
-            }
-
-
-
         }
     }
 }
