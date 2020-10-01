@@ -7,6 +7,7 @@ import dev.panelinha.dev.panelinha.aonline.dao.DAO
 import dev.panelinha.dev.panelinha.aonline.dtos.LoginUserDTO
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
 import dev.panelinha.dev.panelinha.aonline.dtos.UpdateUserDTO
+import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.litote.kmongo.*
@@ -24,7 +25,7 @@ class AuthDAO: DAO() {
         val regex = """(self.location.href = "logon.asp";)""".toRegex()
 
         if (regex.containsMatchIn(login.body()))
-            throw Exception("Login failed.")
+            throw InvalidCredentialsAlunoOnlineException("Login failed.")
 
         return login.cookies()
     }
@@ -38,7 +39,7 @@ class AuthDAO: DAO() {
         val user = collection.findOne { User::login eq loginUserDTO.login }
 
         if (!user!!.vericaSenha(loginUserDTO.senha))
-            throw Exception("Login failed.")
+            throw InvalidCredentialsAlunoOnlineException("Login failed.")
 
         return user
     }
