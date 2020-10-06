@@ -3,27 +3,21 @@ package dev.panelinha.aonline.dao
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.dao.PageDAO
+import dev.panelinha.dev.panelinha.aonline.dtos.BoletimDTO
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 class AcademicoDAO: PageDAO() {
-    fun boletim(user: User): List<Map<String, String>> {
+    fun boletim(user: User): BoletimDTO {
         val boletim = getConnection("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp", user).get()
 
-        val headers = boletim
-                .select("#Open_Text_General > thead > tr:nth-child(2) > th")
-                .map { it.text() }
-
         val rows = boletim
-                .select("#Open_Text_General > tbody > tr")
+            .select("#Open_Text_General > tbody > tr")
+            .map {row ->
+                row.select("td").map { it.text() }
+            }
 
-        return rows.map {
-            val materies: MutableMap<String, String> = mutableMapOf()
-            val row = it.select("td")
-            for ((index, head) in headers.withIndex())
-                materies[head] = row[index].text()
-            materies
-        }
+        return BoletimDTO(rows)
     }
 
     // TODO
