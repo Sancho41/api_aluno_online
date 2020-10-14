@@ -22,8 +22,8 @@ class BoletimDTO(
             it[3].toDoubleOrNull() ?: 0.0,   // P2
             it[10].toDoubleOrNull() ?: 0.0,  // Total Faltas
             it[12].toDoubleOrNull() ?: 0.0,  // Carga Horária
-            it[13].toDoubleOrNull() ?: 0.0,  // Porcentagem de frequência
-            it[14]              // Situação
+            it[14].toDoubleOrNull() ?: 0.0,  // Porcentagem de frequência
+            it[15]              // Situação
         )
     }
 }
