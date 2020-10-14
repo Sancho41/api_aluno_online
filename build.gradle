@@ -50,6 +50,7 @@ dependencies {
     compile group: 'org.litote.kmongo', name: 'kmongo', version: '4.1.2'
 
 
+    compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
 }

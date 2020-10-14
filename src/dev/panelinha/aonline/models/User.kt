@@ -2,6 +2,7 @@ package dev.panelinha.aonline.models
 
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
 import io.ktor.auth.Principal
+import org.mindrot.jbcrypt.BCrypt
 
 class User(registerDTO: RegisterDTO) : Principal {
     var login: String = registerDTO.login
@@ -16,12 +17,10 @@ class User(registerDTO: RegisterDTO) : Principal {
     }
 
     fun vericaSenha(senha: String): Boolean {
-        // TODO: Validação de senha
-        return this.senha == senha
+        return BCrypt.checkpw(senha, this.senha)
     }
 
     fun getSenha(): String {
-        // TODO: Criptografia de senha
-        return senha
+        return BCrypt.hashpw(this.senha, BCrypt.gensalt())
     }
 }
