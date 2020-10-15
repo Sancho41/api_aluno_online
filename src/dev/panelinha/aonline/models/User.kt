@@ -1,12 +1,13 @@
 package dev.panelinha.aonline.models
 
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
+import dev.panelinha.dev.panelinha.aonline.dtos.UpdateUserDTO
 import io.ktor.auth.Principal
 import org.mindrot.jbcrypt.BCrypt
 
 class User(registerDTO: RegisterDTO) : Principal {
     var login: String = registerDTO.login
-    private val senha: String = registerDTO.senha
+    private var senha: String = registerDTO.senha
     var isAdmin: Boolean = false
     var matricula: String? = null
     var senhaAO: String? = null
@@ -22,5 +23,17 @@ class User(registerDTO: RegisterDTO) : Principal {
 
     fun getSenha(): String {
         return BCrypt.hashpw(this.senha, BCrypt.gensalt())
+    }
+
+    fun updateUser(updateUserDTO: UpdateUserDTO){
+        if (!updateUserDTO.novaSenha.isNullOrBlank()) {
+            if (updateUserDTO.senhaAtual == null)
+                throw Exception("Senha atual inválida.")
+            else if (this.vericaSenha(updateUserDTO.senhaAtual!!)) {
+                this.senha = updateUserDTO.novaSenha!!
+            }
+        }
+        this.matricula = updateUserDTO.matricula ?: this.matricula
+        this.senhaAO = updateUserDTO.senhaAO?: this.senhaAO
     }
 }

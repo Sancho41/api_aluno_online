@@ -21,6 +21,7 @@ class AuthService {
     }
 
     fun update(user: User, updateUserDTO: UpdateUserDTO): User {
-        return dao.update(user, updateUserDTO)
+        user.updateUser(updateUserDTO)
+        return dao.update(user)
     }
 }

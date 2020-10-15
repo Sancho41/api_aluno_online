@@ -74,9 +74,9 @@ class AuthDAO: DAO() {
         }
     }
 
-    fun update(user: User, updateUserDTO: UpdateUserDTO): User {
+    fun update(user: User): User {
         val collection = getCollection<User>()
-        collection.updateOne(User::login eq user.login, updateUserDTO)
+        collection.updateOne(User::login eq user.login, user)
         return this.getUserByLogin(user.login) as User
     }
 }
