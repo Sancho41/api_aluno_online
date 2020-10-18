@@ -17,13 +17,8 @@ class User(registerDTO: RegisterDTO) : Principal {
         if (registerDTO.senhaAO != null) this.senhaAO = registerDTO.senhaAO
     }
 
-    fun vericaSenha(senha: String): Boolean {
-        return BCrypt.checkpw(senha, this.senha)
-    }
-
-    fun getSenha(): String {
-        return BCrypt.hashpw(this.senha, BCrypt.gensalt())
-    }
+    fun vericaSenha(senha: String): Boolean = BCrypt.checkpw(senha, this.senha)
+    fun getSenha(): String = BCrypt.hashpw(this.senha, BCrypt.gensalt())
 
     fun updateUser(updateUserDTO: UpdateUserDTO){
         if (!updateUserDTO.novaSenha.isNullOrBlank()) {
@@ -36,4 +31,6 @@ class User(registerDTO: RegisterDTO) : Principal {
         this.matricula = updateUserDTO.matricula ?: this.matricula
         this.senhaAO = updateUserDTO.senhaAO?: this.senhaAO
     }
+
+    fun getCredenciais(): List<String> = listOf(matricula!!, senhaAO!!)
 }
