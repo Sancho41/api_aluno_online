@@ -1,12 +1,10 @@
 package dev.panelinha.aonline.dao
 
 import com.mongodb.MongoWriteException
-import com.mongodb.client.model.UpdateOptions
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.dao.DAO
 import dev.panelinha.dev.panelinha.aonline.dtos.LoginUserDTO
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.UpdateUserDTO
 import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -30,15 +28,17 @@ class AuthDAO: DAO() {
         return login.cookies()
     }
 
-    fun getCookies(user: User): Map<String, String> {
-        return this.getCookies(user.matricula as String, user.senhaAO as String)
+    fun getCookies(user: User): Map<String, String> { //TODO: Remover o scraping desse arquivo
+        val matricula = user.credenciaisAO?.matricula;
+        val senha = user.credenciaisAO?.senhaDescriptografada()
+        return this.getCookies(matricula!!, senha!!)
     }
 
     fun login(loginUserDTO: LoginUserDTO): User {
         val collection = getCollection<User>()
-        val user = collection.findOne { User::login eq loginUserDTO.login }
+        val user = collection.findOne { User::email eq loginUserDTO.email }
 
-        if (!user!!.vericaSenha(loginUserDTO.senha))
+        if (!user!!.verificaSenha(loginUserDTO.senha))
             throw InvalidCredentialsAlunoOnlineException("Login failed.")
 
         return user
@@ -57,26 +57,27 @@ class AuthDAO: DAO() {
         return user
     }
 
-    fun getUserByLogin(login: String): Principal {
+    fun getUserByEmail(email: String): Principal {
         val collection = getCollection<User>()
-        return collection.findOne(User::login eq login)
+        return collection.findOne(User::email eq email)
             ?: throw Exception("Não foi possível efetuar login")
-    }
-
-    fun upToDate(user: User): Boolean {
-        if (user.matricula == null || user.senhaAO == null)
-            return false
-        return try {
-            getCookies(user)
-            true
-        } catch (e: Exception){
-            false
-        }
     }
 
     fun update(user: User): User {
         val collection = getCollection<User>()
-        collection.updateOne(User::login eq user.login, user)
-        return this.getUserByLogin(user.login) as User
+        collection.updateOne(User::email eq user.email, user)
+        return this.getUserByEmail(user.email) as User
+    }
+
+    fun updateAo(user: User): User {
+        val collection = getCollection<User>()
+
+        val matricula = user.credenciaisAO?.matricula!!
+        val senha = user.credenciaisAO?.getSenha()!!
+
+        val target = "{\$set: { credenciaisAO: { matricula: \"$matricula\", senha: \"$senha\" } } }"
+
+        collection.updateOne(user::email eq user.email, target)
+        return user;
     }
 }

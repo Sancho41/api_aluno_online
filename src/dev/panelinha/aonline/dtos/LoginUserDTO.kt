@@ -1,3 +1,3 @@
 package dev.panelinha.dev.panelinha.aonline.dtos
 
-class LoginUserDTO(var login: String, var senha: String)
+class LoginUserDTO(val email: String, val senha: String)

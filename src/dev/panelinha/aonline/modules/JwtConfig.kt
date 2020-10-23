@@ -18,6 +18,6 @@ object JwtConfig {
     fun generateToken(user: User): String = JWT.create()
         .withSubject("Authentication")
         .withIssuer(issuer)
-        .withClaim("login", user.login)
+        .withClaim("email", user.email)
         .sign(algorithm)
 }

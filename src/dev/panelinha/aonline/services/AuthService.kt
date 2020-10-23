@@ -2,9 +2,9 @@ package dev.panelinha.dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.LoginUserDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.UpdateUserDTO
+import dev.panelinha.dev.panelinha.aonline.crawler.AuthenticatedCrawler
+import dev.panelinha.dev.panelinha.aonline.dtos.*
+import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
 
 class AuthService {
     private val dao = AuthDAO()
@@ -16,12 +16,14 @@ class AuthService {
         return dao.register(registerDTO)
     }
 
-    fun upToDate(user: User): Boolean {
-        return dao.upToDate(user)
-    }
-
-    fun update(user: User, updateUserDTO: UpdateUserDTO): User {
-        user.updateUser(updateUserDTO)
-        return dao.update(user)
+    fun registerAlunoOnline(user: User, registerAODTO: RegisterAODTO): ApiKeyDTO {
+        val check = AuthenticatedCrawler.checkCredentials(registerAODTO.matricula, registerAODTO.senha)
+        if (check) {
+            val chave = "123";
+            user.credenciaisAO = User.CredenciaisAO(registerAODTO.matricula, registerAODTO.senha, chave)
+            dao.updateAo(user)
+            return ApiKeyDTO(chave)
+        }
+        throw InvalidCredentialsAlunoOnlineException("Login failed.")
     }
 }

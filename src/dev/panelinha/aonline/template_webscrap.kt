@@ -23,9 +23,9 @@ fun main() {
         .execute()
         .cookies()
 
-    val crawler = HorarioDeAulasCrawler(User(RegisterDTO("", "", "1712130049", "147368")))
-    crawler.scrap()
-    val gson = GsonBuilder().setPrettyPrinting().create()
-    println(gson.toJson(crawler.scrap()))
+//    val crawler = HorarioDeAulasCrawler())
+//    crawler.scrap()
+//    val gson = GsonBuilder().setPrettyPrinting().create()
+//    println(gson.toJson(crawler.scrap()))
 }
 
