@@ -13,6 +13,7 @@ class User: Principal {
         private var senha: String,
         private var chave: String = "nokey"
     ) {
+        //TODO: criar lógica de criptografia
         fun getSenha(): String = this.senha
         fun criptografarSenha(): CredenciaisAO = this
         
