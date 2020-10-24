@@ -21,8 +21,7 @@ fun Route.authRouting() {
             try {
                 val user = service.login(it)
                 val token = JwtConfig.generateToken(user)
-                val upToDate = service.upToDate(user)
-                call.respond(ResponseLoginDTO(token, upToDate))
+                call.respond(ResponseLoginDTO(token))
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.Forbidden, e)
             }
@@ -30,9 +29,8 @@ fun Route.authRouting() {
 
         post<RegisterDTO>("/register") {
             try {
-                val user = service.register(it)
-                val upToDate = service.upToDate(user)
-                call.respond(HttpStatusCode.Created, ResponseRegisterDTO(user, upToDate))
+                service.register(it)
+                call.respond(HttpStatusCode.Created)
             } catch (e: Exception) {
                 println(e.printStackTrace())
                 call.respond(HttpStatusCode.Forbidden, e)
@@ -40,12 +38,12 @@ fun Route.authRouting() {
         }
 
         authenticate {
-            post<UpdateUserDTO>("/update") {
+            //TODO: Criar rota para mudar senha de usuário.
+            post<RegisterAODTO>("/generate") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
-                    val updatedUser = service.update(user, it)
-                    val upToDate = service.upToDate(updatedUser)
-                    call.respond(HttpStatusCode.OK, ResponseRegisterDTO(updatedUser, upToDate))
+                    val user = call.principal<User>()!!
+                    val apiToken = service.registerAlunoOnline(user, it)
+                    call.respond(HttpStatusCode.Created, apiToken)
                 } catch (e: Exception) {
                     call.respond(HttpStatusCode.Forbidden, e)
                 }

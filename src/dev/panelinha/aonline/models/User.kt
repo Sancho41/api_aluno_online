@@ -1,36 +1,45 @@
 package dev.panelinha.aonline.models
 
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.UpdateUserDTO
 import io.ktor.auth.Principal
 import org.mindrot.jbcrypt.BCrypt
 
-class User(registerDTO: RegisterDTO) : Principal {
-    var login: String = registerDTO.login
-    private var senha: String = registerDTO.senha
-    var isAdmin: Boolean = false
-    var matricula: String? = null
-    var senhaAO: String? = null
+class User: Principal {
+    var email: String
+    private var senha: String
 
-    init {
-        if (registerDTO.matricula != null) this.matricula = registerDTO.matricula
-        if (registerDTO.senhaAO != null) this.senhaAO = registerDTO.senhaAO
-    }
+    class CredenciaisAO (
+        var matricula: String,
+        private var senha: String,
+        private var chave: String = "nokey"
+    ) {
+        //TODO: criar lógica de criptografia
+        fun getSenha(): String = this.senha
+        fun criptografarSenha(): CredenciaisAO = this
+        
+        
+        fun senhaDescriptografada() = this.senha
 
-    fun vericaSenha(senha: String): Boolean = BCrypt.checkpw(senha, this.senha)
-    fun getSenha(): String = BCrypt.hashpw(this.senha, BCrypt.gensalt())
-
-    fun updateUser(updateUserDTO: UpdateUserDTO){
-        if (!updateUserDTO.novaSenha.isNullOrBlank()) {
-            if (updateUserDTO.senhaAtual == null)
-                throw Exception("Senha atual inválida.")
-            else if (this.vericaSenha(updateUserDTO.senhaAtual!!)) {
-                this.senha = updateUserDTO.novaSenha!!
-            }
+        fun atualizaSenha(novaSenha: String) {
+            this.senha = novaSenha
         }
-        this.matricula = updateUserDTO.matricula ?: this.matricula
-        this.senhaAO = updateUserDTO.senhaAO?: this.senhaAO
     }
 
-    fun getCredenciais(): List<String> = listOf(matricula!!, senhaAO!!)
+    constructor(registerDTO: RegisterDTO) {
+        this.email = registerDTO.email
+        this.senha = registerDTO.senha
+    }
+
+    constructor() {
+        this.email = ""
+        this.senha = ""
+    }
+
+    var credenciaisAO: CredenciaisAO? = null
+
+    fun verificaSenha(senha: String): Boolean = BCrypt.checkpw(senha, this.senha)
+    fun getSenha(): String = BCrypt.hashpw(this.senha, BCrypt.gensalt())
+    fun atualizaSenha(senhaAntiga: String, novaSenha: String) {
+        if (this.verificaSenha(senhaAntiga)) this.senha = novaSenha
+    }
 }

@@ -12,6 +12,7 @@ import io.ktor.auth.jwt.jwt
 import io.ktor.gson.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
+import org.litote.kmongo.json
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -33,12 +34,11 @@ fun Application.module(testing: Boolean = false) {
             verifier(JwtConfig.verifier)
             realm = "dev.panelinha"
             validate {
-                val login = it.payload.getClaim("login").asString()
-                if (login != null) {
+                val email = it.payload.getClaim("email").asString()
+                if (email != null) {
                     val authDAO = AuthDAO()
-                    authDAO.getUserByLogin(login)
-                }
-                else null
+                    authDAO.getUserByEmail(email)
+                } else null
             }
         }
     }
