@@ -3,6 +3,7 @@ package dev.panelinha.dev.panelinha.aonline
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
+import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasMatriculadasCrawler
 import dev.panelinha.dev.panelinha.aonline.crawler.HorarioDeAulasCrawler
 import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
@@ -26,8 +27,8 @@ fun main() {
 //        .cookies()
 
     val user = User()
-    user.credenciaisAO = User.CredenciaisAO("1712130049", "147368");
-    val crawler = DisciplinasCursadasCrawler(user)
+    user.credenciaisAO = User.CredenciaisAO("", "");
+    val crawler = DisciplinasMatriculadasCrawler(user)
     crawler.scrap()
     val gson = GsonBuilder().setPrettyPrinting().create()
     println(gson.toJson(crawler.scrap()))
