@@ -2,20 +2,20 @@ package dev.panelinha.dev.panelinha.aonline.dtos
 
 class DisciplinasCursadasDTO {
     class Disciplina(
-        val Ano: String,
-        val Codigo: String,
-        val Disciplina: String,
-        val Turma: String,
-        val Serie: Int,
-        val Credito: Float,
-        val Aula: Float,
-        val Prat: Int,
-        val Est: Int,
-        val CargaHoraria: Int,
-        val Media: String,
-        val Faltas: Float,
-        val Frequencia: Float,
-        val Situacao: String
+        val ano: String,
+        val codigo: String,
+        val Ddisciplina: String,
+        val turma: String,
+        val serie: Int,
+        val credito: Float,
+        val aula: Float,
+        val prat: Int,
+        val est: Int,
+        val cargaHoraria: Int,
+        val media: String,
+        val faltas: Float,
+        val frequencia: Float,
+        val situacao: String
     ) {
 
     }

@@ -4,11 +4,11 @@ class DisciplinasPendentesDTO {
 
     class DisciplinaPendente(
 
-            val Serie: Int,
-            val Cod: String,
-            val Disciplina: String,
-            val CargaHoraria: Int,
-            val Creditos: Float
+            val serie: Int,
+            val cod: String,
+            val disciplina: String,
+            val cargaHoraria: Int,
+            val creditos: Float
 
     )
 

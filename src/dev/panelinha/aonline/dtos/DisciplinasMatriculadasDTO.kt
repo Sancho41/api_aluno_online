@@ -3,14 +3,14 @@ package dev.panelinha.dev.panelinha.aonline.dtos
 class DisciplinasMatriculadasDTO {
 
     class DisciplinaM(
-            val Cod: String,
-            val Disciplina: String,
-            val Turma: String,
-            val Cred: Float,
-            val Aula: Float,
-            val Prat: Float,
-            val Est: Float,
-            val Situacao: String
+            val cod: String,
+            val disciplina: String,
+            val turma: String,
+            val cred: Float,
+            val aula: Float,
+            val prat: Float,
+            val est: Float,
+            val situacao: String
     )
 
 
