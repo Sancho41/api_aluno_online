@@ -18,7 +18,6 @@ class DisciplinasPendentesDTO {
 
         disciplinasPendentes.add(
                 DisciplinaPendente(
-
                         dados[0].toIntOrNull() ?: 0,
                         dados[1],
                         dados[2],

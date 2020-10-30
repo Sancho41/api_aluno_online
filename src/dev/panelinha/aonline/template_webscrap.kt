@@ -2,11 +2,9 @@ package dev.panelinha.dev.panelinha.aonline
 
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasMatriculadasCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasPendentesCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.HorarioDeAulasCrawler
+import dev.panelinha.dev.panelinha.aonline.crawler.*
 import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
+import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -28,10 +26,10 @@ fun main() {
 //        .cookies()
 
     val user = User()
-    user.credenciaisAO = User.CredenciaisAO("", "");
-    val crawler = DisciplinasPendentesCrawler(user)
-    crawler.scrap()
+    user.credenciaisAO = User.CredenciaisAO("1912130015", "27062001");
+    val crawler = FinanceiroCrawler(user)
+    val retorno = crawler.scrap(ExtratoDTO("10/01/2019","20/10/2020"))
     val gson = GsonBuilder().setPrettyPrinting().create()
-    println(gson.toJson(crawler.scrap()))
+    println(gson.toJson(retorno))
 }
 
