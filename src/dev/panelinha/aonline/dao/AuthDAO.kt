@@ -57,10 +57,14 @@ class AuthDAO: DAO() {
         return user
     }
 
-    fun getUserByEmail(email: String): Principal {
+    fun getUserByEmail(email: String, chave: String? = "nokey"): Principal {
         val collection = getCollection<User>()
-        return collection.findOne(User::email eq email)
+
+        val user = collection.findOne(User::email eq email)
             ?: throw Exception("Não foi possível efetuar login")
+
+        user.credenciaisAO?.chave = chave;
+        return user;
     }
 
     fun update(user: User): User {

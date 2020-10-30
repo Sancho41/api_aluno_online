@@ -35,9 +35,10 @@ fun Application.module(testing: Boolean = false) {
             realm = "dev.panelinha"
             validate {
                 val email = it.payload.getClaim("email").asString()
+                val chave = it.payload.getClaim("chave").asString()
                 if (email != null) {
                     val authDAO = AuthDAO()
-                    authDAO.getUserByEmail(email)
+                    authDAO.getUserByEmail(email, chave)
                 } else null
             }
         }

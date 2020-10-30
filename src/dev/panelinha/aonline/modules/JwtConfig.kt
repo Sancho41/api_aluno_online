@@ -19,5 +19,6 @@ object JwtConfig {
         .withSubject("Authentication")
         .withIssuer(issuer)
         .withClaim("email", user.email)
+        .withClaim("chave", user.credenciaisAO?.chave)
         .sign(algorithm)
 }
