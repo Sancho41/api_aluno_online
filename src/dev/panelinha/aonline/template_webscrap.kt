@@ -3,33 +3,36 @@ package dev.panelinha.dev.panelinha.aonline
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.HorarioDeAulasCrawler
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import org.jsoup.Connection
-import org.jsoup.Jsoup
+import dev.panelinha.dev.panelinha.aonline.utils.AES
+import java.security.SecureRandom
+import java.util.*
+import javax.crypto.KeyGenerator
+import javax.crypto.spec.SecretKeySpec
 
 fun main() {
-// matricula
-// senha
+//    val user = User()
+//    user.credenciaisAO = User.CredenciaisAO("1712130049", "147368");
+//    val crawler = DisciplinasCursadasCrawler(user)
+//    val gson = GsonBuilder().setPrettyPrinting().create()
+//    println(gson.toJson(crawler.scrap()))
 
-// nome
-// curso
-// turno
-// sitacao
+//    println(UUID.randomUUID())
 
-//    val cookies = Jsoup.connect("http://online.iesb.br/aonline/middle_logon.asp")
-//        .data("txtnumero_matricula", "1712130049")
-//        .data("txtsenha_tac", "147368")
-//        .method(Connection.Method.POST)
-//        .execute()
-//        .cookies()
+    // Key to string
+//    val secret = KeyGenerator.getInstance("AES").generateKey()
+//    val encoded = Base64.getEncoder().encodeToString(secret.encoded)
 
-    val user = User()
-    user.credenciaisAO = User.CredenciaisAO("1712130049", "147368");
-    val crawler = DisciplinasCursadasCrawler(user)
-    crawler.scrap()
-    val gson = GsonBuilder().setPrettyPrinting().create()
-    println(gson.toJson(crawler.scrap()))
+
+    // String to key
+//    val decodedKey = Base64.getDecoder().decode(encoded)
+//    val originalKey = SecretKeySpec(decodedKey, 0, decodedKey.size, "AES")
+
+
+//    val secret = "sLt2u16nXhXYSBfn4Dka7g=="
+
+//    val encrypted = AES.setKey(secret).encrypt("Gabriel Sancho")
+//    println(encrypted)
+
+//    val decrypted = AES.setKey(secret).decrypt("iF9p74oSkdIR4XyMW3fGKg==")
+//    println(decrypted)
 }
-

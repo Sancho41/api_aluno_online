@@ -20,6 +20,7 @@ fun Route.authRouting() {
         post <LoginUserDTO>("/login") {
             try {
                 val user = service.login(it)
+                user.credenciaisAO?.chave = it.chave ?: "nokey"
                 val token = JwtConfig.generateToken(user)
                 call.respond(ResponseLoginDTO(token))
             } catch (e: Exception) {

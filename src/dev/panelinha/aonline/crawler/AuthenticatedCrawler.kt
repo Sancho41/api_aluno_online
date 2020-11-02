@@ -14,6 +14,7 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
         fun checkCredentials(matricula: String, senha: String): Boolean {
             val user = User()
             user.credenciaisAO = User.CredenciaisAO(matricula, senha, KeyGenerator.getAESKey())
+            user.credenciaisAO?.criptografarSenha()
             val auth = AuthenticatedCrawler(user)
             return try {
                 auth.getCookies()

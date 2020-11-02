@@ -63,7 +63,7 @@ class AuthDAO: DAO() {
         val user = collection.findOne(User::email eq email)
             ?: throw Exception("Não foi possível efetuar login")
 
-        user.credenciaisAO?.chave = chave;
+        user.credenciaisAO?.chave = chave!!;
         return user;
     }
 

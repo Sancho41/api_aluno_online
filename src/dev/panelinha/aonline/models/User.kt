@@ -1,10 +1,12 @@
 package dev.panelinha.aonline.models
 
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
+import dev.panelinha.dev.panelinha.aonline.utils.AES
 import io.ktor.auth.Principal
 import io.ktor.utils.io.core.toByteArray
 import org.mindrot.jbcrypt.BCrypt
 import java.nio.charset.Charset
+import java.util.*
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -16,33 +18,16 @@ class User : Principal {
     class CredenciaisAO(
         var matricula: String,
         private var senha: String,
-        var chave: String? = "nokey"
+        var chave: String = "nokey"
     ) {
-        init {
-            this.criptografarSenha()
-        }
-
-        fun getSenha(): String = this.senha
-        private fun criptografarSenha() {
-            val encripta = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE")
-            val chave = SecretKeySpec(this.chave?.toByteArray(), "AES")
-            encripta.init(
-                Cipher.ENCRYPT_MODE,
-                chave,
-                IvParameterSpec("AAAAAAAAAAAAAAAA".toByteArray())
-            )
-            this.senha = String(encripta.doFinal(this.senha.toByteArray()))
+        fun getSenha(): String = AES.setKey(this.chave).encrypt(this.senha)!!
+        fun criptografarSenha() : CredenciaisAO {
+            this.senha = AES.setKey(this.chave).encrypt(this.senha)!!
+            return this
         }
 
         fun senhaDescriptografada(): String {
-            val decripta = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE")
-            val chave = SecretKeySpec(this.chave?.toByteArray(), "AES")
-            decripta.init(
-                Cipher.DECRYPT_MODE,
-                chave,
-                IvParameterSpec("AAAAAAAAAAAAAAAA".toByteArray())
-            )
-            return String(decripta.doFinal(this.chave?.toByteArray()))
+            return AES.setKey(this.chave).decrypt(this.senha)!!
         }
 
         fun atualizaSenha(novaSenha: String) {
