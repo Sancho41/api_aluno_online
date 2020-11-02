@@ -4,7 +4,7 @@ class DisciplinasCursadasDTO {
     class Disciplina(
         val ano: String,
         val codigo: String,
-        val disciplina: String,
+        val Ddisciplina: String,
         val turma: String,
         val serie: Int,
         val credito: Float,
