@@ -1,27 +1,38 @@
 package dev.panelinha.aonline.models
 
 import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
+import dev.panelinha.dev.panelinha.aonline.utils.AES
 import io.ktor.auth.Principal
+import io.ktor.utils.io.core.toByteArray
 import org.mindrot.jbcrypt.BCrypt
+import java.nio.charset.Charset
+import java.util.*
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
-class User: Principal {
+class User : Principal {
     var email: String
     private var senha: String
 
-    class CredenciaisAO (
+    class CredenciaisAO(
         var matricula: String,
         private var senha: String,
-        private var chave: String = "nokey"
+        var chave: String = "nokey"
     ) {
-        //TODO: criar lógica de criptografia
-        fun getSenha(): String = this.senha
-        fun criptografarSenha(): CredenciaisAO = this
-        
-        
-        fun senhaDescriptografada() = this.senha
+        fun getSenha(): String = AES.setKey(this.chave).encrypt(this.senha)!!
+        fun criptografarSenha() : CredenciaisAO {
+            this.senha = AES.setKey(this.chave).encrypt(this.senha)!!
+            return this
+        }
+
+        fun senhaDescriptografada(): String {
+            return AES.setKey(this.chave).decrypt(this.senha)!!
+        }
 
         fun atualizaSenha(novaSenha: String) {
             this.senha = novaSenha
+            this.criptografarSenha()
         }
     }
 

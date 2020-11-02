@@ -2,6 +2,7 @@ package dev.panelinha.dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
+import dev.panelinha.dev.panelinha.aonline.utils.KeyGenerator
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 
@@ -12,7 +13,8 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
     companion object {
         fun checkCredentials(matricula: String, senha: String): Boolean {
             val user = User()
-            user.credenciaisAO = User.CredenciaisAO(matricula, senha, "").criptografarSenha()
+            user.credenciaisAO = User.CredenciaisAO(matricula, senha, KeyGenerator.getAESKey())
+            user.credenciaisAO?.criptografarSenha()
             val auth = AuthenticatedCrawler(user)
             return try {
                 auth.getCookies()

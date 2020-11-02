@@ -22,7 +22,7 @@ fun Route.academicoRouting() {
         route(ApiPaths.ACADEMICO) {
             get("/boletim") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     val boletim = service.boletim(user)
                     call.respond(boletim)
                 } catch (e: Exception) {
