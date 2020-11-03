@@ -2,19 +2,14 @@ package dev.panelinha.dev.panelinha.aonline
 
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
-import dev.panelinha.dev.panelinha.aonline.utils.AES
-import java.security.SecureRandom
-import java.util.*
-import javax.crypto.KeyGenerator
-import javax.crypto.spec.SecretKeySpec
+import dev.panelinha.dev.panelinha.aonline.crawler.ServicoCrawler
 
 fun main() {
-//    val user = User()
-//    user.credenciaisAO = User.CredenciaisAO("1712130049", "147368");
-//    val crawler = DisciplinasCursadasCrawler(user)
-//    val gson = GsonBuilder().setPrettyPrinting().create()
-//    println(gson.toJson(crawler.scrap()))
+    val user = User()
+    user.credenciaisAO = User.CredenciaisAO("1912130004", "05012001");
+    val crawler = ServicoCrawler(user)
+    val gson = GsonBuilder().setPrettyPrinting().create()
+    println(gson.toJson(crawler.scrap()))
 
 //    println(UUID.randomUUID())
 
