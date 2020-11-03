@@ -3,13 +3,16 @@ package dev.panelinha.dev.panelinha.aonline
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.crawler.ServicoCrawler
+import dev.panelinha.dev.panelinha.aonline.dtos.ServicoDTO
 
 fun main() {
     val user = User()
-    user.credenciaisAO = User.CredenciaisAO("1912130004", "05012001");
+    user.credenciaisAO = User.CredenciaisAO("1912130015", "27062001");
+    user.credenciaisAO?.criptografarSenha()
     val crawler = ServicoCrawler(user)
+    val retorno = crawler.scrap(ServicoDTO())
     val gson = GsonBuilder().setPrettyPrinting().create()
-    println(gson.toJson(crawler.scrap()))
+    println(gson.toJson(retorno))
 
 //    println(UUID.randomUUID())
 

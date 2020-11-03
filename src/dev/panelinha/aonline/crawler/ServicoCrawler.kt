@@ -14,12 +14,14 @@ class ServicoCrawler(user: User): AuthenticatedCrawler(user) {
 
         val servicoDTO = ServicoDTO()
 
+        //println(document)
+
         document.select(
-            "#home .classdatatable > thead > tr > th"
+            ".classdatatable > tbody > tr"
         ).forEach { elemento ->
-            val linha = elemento.select("th").map{ coluna -> coluna.text() }
-            if (linha.size == 4 )
-                servicoDTO.addAgendamentos(linha)
+            val linha = elemento.select("td").map{ coluna -> coluna.text() }
+
+            servicoDTO.addAgendamentos(linha)
 
         }
 
