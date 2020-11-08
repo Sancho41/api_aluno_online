@@ -3,7 +3,7 @@ package dev.panelinha.dev.panelinha.aonline.dtos
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
-class ServicoDTO {
+class AgendamentoDTO {
     class Agendamento(
         val numero: String,
         val motivoAtendimento: String,

@@ -1,15 +1,11 @@
 package dev.panelinha.dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dao.ServicoDAO
+import dev.panelinha.dev.panelinha.aonline.crawler.AgendamentoCrawler
+import dev.panelinha.dev.panelinha.aonline.dtos.AgendamentoDTO
 
 class ServicoService {
-
-    private val dao = ServicoDAO()
-
-    fun agendamento(user: User): List<Map<String, String>>{
-
-        return dao.agendamentos(user)
-
+    fun agendamento(user: User): AgendamentoDTO {
+        return AgendamentoCrawler(user).scrap()
     }
 }
