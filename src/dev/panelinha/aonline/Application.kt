@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline
+package dev.panelinha.aonline
 
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
