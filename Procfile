@@ -1,1 +1,1 @@
-web: build/install/kotlinserver/bin/kotlinserver
+web: build/scripts/api_aluno_online
