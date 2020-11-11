@@ -19,7 +19,7 @@ apply plugin: 'application'
 
 group 'dev.panelinha'
 version '0.0.1'
-mainClassName = "dev.panelinha.ApplicationKt"
+mainClassName = "dev.panelinha.aonline.ApplicationKt"
 task stage {
     dependsOn installDist
 }

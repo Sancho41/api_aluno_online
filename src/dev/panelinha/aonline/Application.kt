@@ -1,4 +1,4 @@
-package dev.panelinha
+package dev.panelinha.dev.panelinha.aonline
 
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
@@ -14,7 +14,6 @@ import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import org.litote.kmongo.json
 
 fun main(args: Array<String>) {
     val port = System.getenv("PORT")?.toInt() ?: 8080
