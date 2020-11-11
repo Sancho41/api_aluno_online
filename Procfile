@@ -1,1 +1,1 @@
-web: build/scripts/api_aluno_online
+web: java -jar build/libs/api_aluno_online-0.0.1.jar
