@@ -24,6 +24,15 @@ task stage {
     dependsOn installDist
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': "dev.panelinha.aonline.ApplicationKt"
+        )
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
     test.kotlin.srcDirs = test.java.srcDirs = ['test']
