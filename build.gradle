@@ -19,7 +19,10 @@ apply plugin: 'application'
 
 group 'dev.panelinha'
 version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
+mainClassName = "dev.panelinha.ApplicationKt"
+task stage {
+    dependsOn installDist
+}
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']

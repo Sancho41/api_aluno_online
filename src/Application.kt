@@ -12,54 +12,56 @@ import io.ktor.auth.jwt.jwt
 import io.ktor.gson.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import org.litote.kmongo.json
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>) {
+    val port = System.getenv("PORT")?.toInt() ?: 8080
 
-@Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
-    install(CORS) {
-        method(HttpMethod.Options)
-        method(HttpMethod.Put)
-        method(HttpMethod.Delete)
-        method(HttpMethod.Patch)
-        header(HttpHeaders.Authorization)
-        allowCredentials = true
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
-    }
+    embeddedServer(Netty, port) {
+        install(CORS) {
+            method(HttpMethod.Options)
+            method(HttpMethod.Put)
+            method(HttpMethod.Delete)
+            method(HttpMethod.Patch)
+            header(HttpHeaders.Authorization)
+            allowCredentials = true
+            anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+        }
 
-    install(Authentication) {
-        jwt {
-            verifier(JwtConfig.verifier)
-            realm = "dev.panelinha"
-            validate {
-                val email = it.payload.getClaim("email").asString()
-                val chave = it.payload.getClaim("chave").asString()
-                if (email != null) {
-                    val authDAO = AuthDAO()
-                    authDAO.getUserByEmail(email, chave)
-                } else null
+        install(Authentication) {
+            jwt {
+                verifier(JwtConfig.verifier)
+                realm = "dev.panelinha"
+                validate {
+                    val email = it.payload.getClaim("email").asString()
+                    val chave = it.payload.getClaim("chave").asString()
+                    if (email != null) {
+                        val authDAO = AuthDAO()
+                        authDAO.getUserByEmail(email, chave)
+                    } else null
+                }
             }
         }
-    }
 
-    install(ContentNegotiation) {
-        gson {
-            setPrettyPrinting()
+        install(ContentNegotiation) {
+            gson {
+                setPrettyPrinting()
+            }
         }
-    }
 
-    install(CallLogging)
+        install(CallLogging)
 
-    val client = HttpClient(Apache) {
-    }
+        val client = HttpClient(Apache) {
+        }
 
-    routing {
-        authRouting()
-        academicoRouting()
-        servicoRouting()
-        historicoRouting()
-        financeiroRouter()
-    }
+        routing {
+            authRouting()
+            academicoRouting()
+            servicoRouting()
+            historicoRouting()
+            financeiroRouter()
+        }
+    }.start(wait = true)
 }
