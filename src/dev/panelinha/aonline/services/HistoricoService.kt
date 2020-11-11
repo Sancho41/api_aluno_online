@@ -1,23 +1,23 @@
 package dev.panelinha.dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasCursadasDAO
-import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasMatriculadasDAO
-import dev.panelinha.dev.panelinha.aonline.dao.historico.DisciplinasPendentesDAO
+import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
+import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasMatriculadasCrawler
+import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasPendentesCrawler
+import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
+import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasMatriculadasDTO
+import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
 
 class HistoricoService {
-    fun disciplinasCursadas(user: User): List<Map<String, String>> {
-        val dao = DisciplinasCursadasDAO(user)
-        return dao.getTable()
+    fun disciplinasCursadas(user: User): DisciplinasCursadasDTO {
+        return DisciplinasCursadasCrawler(user).scrap()
     }
 
-    fun disciplinasMatriculadas(user: User): List<Map<String, String>> {
-        val dao = DisciplinasMatriculadasDAO(user)
-        return dao.getTable()
+    fun disciplinasMatriculadas(user: User): DisciplinasMatriculadasDTO {
+        return DisciplinasMatriculadasCrawler(user).scrap()
     }
 
-    fun disciplinasPendentes(user: User): List<Map<String, String>> {
-        val dao = DisciplinasPendentesDAO(user)
-        return dao.getTable()
+    fun disciplinasPendentes(user: User): DisciplinasPendentesDTO {
+        return DisciplinasPendentesCrawler(user).scrap()
     }
 }

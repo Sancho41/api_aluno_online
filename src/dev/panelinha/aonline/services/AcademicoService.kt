@@ -1,16 +1,17 @@
 package dev.panelinha.aonline.services
 
-import dev.panelinha.aonline.dao.AcademicoDAO
 import dev.panelinha.aonline.models.User
+import dev.panelinha.dev.panelinha.aonline.crawler.BoletimCrawler
+import dev.panelinha.dev.panelinha.aonline.crawler.HorarioDeAulasCrawler
+import dev.panelinha.dev.panelinha.aonline.dtos.BoletimDTO
+import dev.panelinha.dev.panelinha.aonline.dtos.HorarioDeAulasDTO
 
 class AcademicoService {
-    private val dao = AcademicoDAO()
-
-    fun boletim (user: User): List<Map<String, String>> {
-        return dao.boletim(user)
+    fun boletim (user: User): BoletimDTO {
+        return BoletimCrawler(user).scrap()
     }
 
-    fun horaAulas(user: User): Map<String, List<Map<String, String>>> {
-        return dao.horaAulas(user)
+    fun horaAulas(user: User): HorarioDeAulasDTO {
+        return HorarioDeAulasCrawler(user).scrap()
     }
 }
