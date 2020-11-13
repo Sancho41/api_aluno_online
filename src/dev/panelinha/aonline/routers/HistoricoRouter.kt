@@ -44,6 +44,15 @@ fun Route.historicoRouting() {
                     call.respond(HttpStatusCode.BadRequest)
                 }
             }
+
+            get("disciplinas-complementares") {
+                try {
+                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    call.respond(service.disciplinasComplementares(user))
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
         }
     }
 }
