@@ -14,11 +14,6 @@ class AgendamentoDTO {
     val Agendamentos: MutableList<Agendamento> = mutableListOf()
 
     fun addAgendamentos(dados: List<String>){
-        val simbols = DecimalFormatSymbols()
-        simbols.decimalSeparator = ','
-        simbols.groupingSeparator = '.'
-        val format = DecimalFormat()
-        format.decimalFormatSymbols = simbols
         Agendamentos.add(
             Agendamento(
                 dados[0],

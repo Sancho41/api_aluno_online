@@ -1,5 +1,6 @@
 package dev.panelinha.dev.panelinha.aonline.dtos
 
+import dev.panelinha.aonline.utils.FloatParser
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
@@ -24,27 +25,22 @@ class FinanceiroDTO {
     val extratos: MutableList<Parcelas> = mutableListOf()
 
     fun addExtrato(dados: List<String>){
-        val simbols = DecimalFormatSymbols()
-        simbols.decimalSeparator = ','
-        simbols.groupingSeparator = '.'
-        val format = DecimalFormat()
-        format.decimalFormatSymbols = simbols
         extratos.add(
                 Parcelas(
-                        dados[0],
-                        dados[1],
-                        dados[2].toLongOrNull() ?: 0,
-                        format.parse(dados[3].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[4].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[5].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[6].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[7].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[8].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[9].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[10].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[11].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[12].ifEmpty { "0,0" }).toFloat(),
-                        format.parse(dados[13].ifEmpty { "0,0" }).toFloat()
+                     dados[0],
+                     dados[1],
+                    dados[2].toLongOrNull() ?: 0,
+                    FloatParser.parse(dados[3]),
+                    FloatParser.parse(dados[4]),
+                    FloatParser.parse(dados[5]),
+                    FloatParser.parse(dados[6]),
+                    FloatParser.parse(dados[7]),
+                    FloatParser.parse(dados[8]),
+                    FloatParser.parse(dados[9]),
+                    FloatParser.parse(dados[10]),
+                    FloatParser.parse(dados[11]),
+                    FloatParser.parse(dados[12]),
+                    FloatParser.parse(dados[13])
                 )
         )
 
