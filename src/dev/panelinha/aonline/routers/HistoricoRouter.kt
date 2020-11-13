@@ -22,7 +22,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>() ?: throw Exception("Unauthorized")
                     call.respond(service.disciplinasCursadas(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina cursada"))
                 }
             }
 
@@ -32,7 +32,7 @@ fun Route.historicoRouting() {
                     val d = service.disciplinasMatriculadas(user)
                     call.respond(d)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina matriculada"))
                 }
             }
 
@@ -41,7 +41,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>() ?: throw Exception("Unauthorized")
                     call.respond(service.disciplinasPendentes(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina pendente"))
                 }
             }
 
@@ -50,7 +50,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>() ?: throw Exception("Unauthorized")
                     call.respond(service.disciplinasComplementares(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina complementar"))
                 }
             }
         }
