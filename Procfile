@@ -1,0 +1,1 @@
+web: java -jar build/libs/api_aluno_online-0.0.1.jar

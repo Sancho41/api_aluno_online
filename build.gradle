@@ -19,9 +19,18 @@ apply plugin: 'application'
 
 group 'dev.panelinha'
 version '0.0.1'
-mainClassName = "dev.panelinha.ApplicationKt"
+mainClassName = "dev.panelinha.aonline.ApplicationKt"
 task stage {
     dependsOn installDist
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': "dev.panelinha.aonline.ApplicationKt"
+        )
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 sourceSets {

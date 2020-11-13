@@ -1,23 +1,33 @@
-package dev.panelinha
+package dev.panelinha.aonline
 
+import ch.qos.logback.classic.Level
+import ch.qos.logback.classic.Logger
+import ch.qos.logback.classic.LoggerContext
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.dev.panelinha.aonline.routers.*
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.routing.*
-import io.ktor.http.*
-import io.ktor.auth.*
+import io.ktor.application.install
+import io.ktor.auth.Authentication
 import io.ktor.auth.jwt.jwt
-import io.ktor.gson.*
-import io.ktor.client.*
-import io.ktor.client.engine.apache.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.apache.Apache
+import io.ktor.features.CORS
+import io.ktor.features.CallLogging
+import io.ktor.features.ContentNegotiation
+import io.ktor.gson.gson
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import org.litote.kmongo.json
+import org.slf4j.LoggerFactory
 
 fun main(args: Array<String>) {
     val port = System.getenv("PORT")?.toInt() ?: 8080
+
+    val loggerContext: LoggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
+    val rootLogger: Logger = loggerContext.getLogger("org.mongodb.driver")
+    rootLogger.level = Level.OFF
 
     embeddedServer(Netty, port) {
         install(CORS) {
