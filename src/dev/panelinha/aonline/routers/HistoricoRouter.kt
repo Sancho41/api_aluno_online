@@ -54,7 +54,7 @@ fun Route.historicoRouting() {
                 }
             }
 
-            get("disciplinas-foradagrade") {
+            get("disciplinas-fora-da-grade") {
                 try {
                     val user = call.principal<User>()!!
                     call.respond(service.disciplinasForadaGrade(user))
