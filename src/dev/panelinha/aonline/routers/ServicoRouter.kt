@@ -21,7 +21,7 @@ fun Route.servicoRouting() {
 
             get("/agendamento") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     val agendamento = service.agendamento(user)
                     call.respond(agendamento)
 

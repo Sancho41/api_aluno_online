@@ -1,6 +1,7 @@
 package dev.panelinha.dev.panelinha.aonline
 
 import com.google.gson.GsonBuilder
+import dev.panelinha.aonline.crawler.DisciplinasForadaGradeCrawler
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.crawler.AgendamentoCrawler
 import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
@@ -11,7 +12,7 @@ fun main() {
     val user = User()
     user.credenciaisAO = User.CredenciaisAO("1712130049", "1473680");
     user.credenciaisAO?.criptografarSenha()
-    val crawler = DisciplinasComplementaresCrawler(user)
+    val crawler = DisciplinasForadaGradeCrawler(user)
     val retorno = crawler.scrap()
     val gson = GsonBuilder().setPrettyPrinting().create()
     println(gson.toJson(retorno))

@@ -1,5 +1,7 @@
 package dev.panelinha.dev.panelinha.aonline.services
 
+import dev.panelinha.aonline.crawler.DisciplinasForadaGradeCrawler
+import dev.panelinha.aonline.dtos.DisciplinasForadaGradeDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
 import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
@@ -25,5 +27,9 @@ class HistoricoService {
 
     fun disciplinasComplementares(user: User): DisciplinasComplementaresDTO {
         return DisciplinasComplementaresCrawler(user).scrap()
+    }
+
+    fun disciplinasForadaGrade(user: User): DisciplinasForadaGradeDTO {
+        return DisciplinasForadaGradeCrawler(user).scrap()
     }
 }
