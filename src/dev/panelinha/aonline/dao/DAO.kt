@@ -11,7 +11,6 @@ open class DAO {
     private val password: String = System.getenv("DB_PASSWORD") ?: ""
     private val host: String = System.getenv("DB_HOST") ?: ""
     private val dbname: String = System.getenv("DB_NAME") ?: "aonline-teste"
-    // TODO: Recuperar dados por variáveis de ambiente
     init {
         val client = KMongo.createClient("mongodb+srv://$username:$password@$host")
         this.database = client.getDatabase(this.dbname)

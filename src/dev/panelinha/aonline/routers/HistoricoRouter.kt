@@ -19,29 +19,47 @@ fun Route.historicoRouting() {
         route(ApiPaths.HISTORICO) {
             get("disciplinas-cursadas") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     call.respond(service.disciplinasCursadas(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina cursada"))
                 }
             }
 
             get("disciplinas-matriculadas") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     val d = service.disciplinasMatriculadas(user)
                     call.respond(d)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina matriculada"))
                 }
             }
 
             get("disciplinas-pendentes") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     call.respond(service.disciplinasPendentes(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina pendente"))
+                }
+            }
+
+            get("disciplinas-complementares") {
+                try {
+                    val user = call.principal<User>()!!
+                    call.respond(service.disciplinasComplementares(user))
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina complementar"))
+                }
+            }
+
+            get("disciplinas-fora-da-grade") {
+                try {
+                    val user = call.principal<User>()!!
+                    call.respond(service.disciplinasForadaGrade(user))
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina fora da grade"))
                 }
             }
         }

@@ -6,6 +6,8 @@ import ch.qos.logback.classic.LoggerContext
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.dev.panelinha.aonline.routers.*
+import io.ktor.application.ApplicationCallPipeline
+import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.auth.Authentication
 import io.ktor.auth.jwt.jwt
@@ -17,6 +19,12 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.httpMethod
+import io.ktor.response.header
+import io.ktor.response.respond
+import io.ktor.response.respondRedirect
+import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -29,15 +37,26 @@ fun main(args: Array<String>) {
     val rootLogger: Logger = loggerContext.getLogger("org.mongodb.driver")
     rootLogger.level = Level.OFF
 
-    embeddedServer(Netty, port) {
+    val application = embeddedServer(Netty, port) {
         install(CORS) {
             method(HttpMethod.Options)
             method(HttpMethod.Put)
             method(HttpMethod.Delete)
             method(HttpMethod.Patch)
             header(HttpHeaders.Authorization)
+            header(HttpHeaders.AccessControlAllowOrigin)
             allowCredentials = true
-            anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+            anyHost()
+
+
+            intercept(ApplicationCallPipeline.Setup) {
+                if (call.request.httpMethod == HttpMethod.Options) {
+                    call.response.header("Access-Control-Allow-Origin", "*")
+                    call.response.header("Access-Control-Allow-Headers", "*")
+                    call.respond(HttpStatusCode.OK)
+                    return@intercept finish()
+                }
+            }
         }
 
         install(Authentication) {
@@ -72,6 +91,16 @@ fun main(args: Array<String>) {
             servicoRouting()
             historicoRouting()
             financeiroRouter()
+
+            get("/") {
+                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                call.respondRedirect(frontend)
+            }
+
+            get ("/*") {
+                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                call.respondRedirect(frontend)
+            }
         }
     }.start(wait = true)
 }
