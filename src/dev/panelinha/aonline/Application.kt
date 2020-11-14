@@ -93,12 +93,12 @@ fun main(args: Array<String>) {
             financeiroRouter()
 
             get("/") {
-                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                val frontend = System.getenv("FRONTEND") ?: "http://localhost:3000"
                 call.respondRedirect(frontend)
             }
 
             get ("/*") {
-                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                val frontend = System.getenv("FRONTEND") ?: "http://localhost:3000"
                 call.respondRedirect(frontend)
             }
         }
