@@ -23,6 +23,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.httpMethod
 import io.ktor.response.header
 import io.ktor.response.respond
+import io.ktor.response.respondRedirect
+import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -89,6 +91,16 @@ fun main(args: Array<String>) {
             servicoRouting()
             historicoRouting()
             financeiroRouter()
+
+            get("/") {
+                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                call.respondRedirect(frontend)
+            }
+
+            get ("/*") {
+                val frontend = System.getenv("PORT") ?: "http://localhost:3000"
+                call.respondRedirect(frontend)
+            }
         }
     }.start(wait = true)
 }

@@ -16,15 +16,15 @@ class BoletimDTO(disciplinas: List<List<String>>) {
     val disciplinas: List<Disciplina>
 
     init {
-        val offset: Int = if (disciplinas.size > 11) 0  else 6
         this.disciplinas = disciplinas.map {
+            val offset: Int = if (it.size > 11) 0  else 6
             Disciplina(
                     it[0], // Código
                     it[1], // Disciplina
                     it[2].toFloatOrNull() ?: 0.0F, // P1
                     it[3].toFloatOrNull() ?: 0.0F, // P2
                     it[4].toFloatOrNull() ?: 0.0F, // P3
-                    it[10 - offset].toFloatOrNull() ?: 0.0F, // Total Faltas
+                    it[11 - offset].toFloatOrNull() ?: 0.0F, // Total Faltas
                     it[12 - offset].toFloatOrNull() ?: 0.0F, // Carga Horária
                     it[14 - offset].toFloatOrNull() ?: 0.0F, // Porcentagem de frequência
                     it[15 - offset] // Situação
