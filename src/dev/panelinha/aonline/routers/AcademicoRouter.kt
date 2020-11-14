@@ -41,7 +41,7 @@ fun Route.academicoRouting() {
 
             get("/hora_aula") {
                 try {
-                    val user = call.principal<User>() ?: throw Exception("Unauthorized")
+                    val user = call.principal<User>()!!
                     val horaAulas = service.horaAulas(user)
                     call.respond(horaAulas)
                 } catch (e: Exception) {
