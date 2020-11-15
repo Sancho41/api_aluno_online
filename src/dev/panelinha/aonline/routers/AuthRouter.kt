@@ -3,6 +3,9 @@ package dev.panelinha.aonline.routers
 import dev.panelinha.aonline.dtos.UserDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.*
+import dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
+import dev.panelinha.aonline.exceptions.InvalideCredentialsException
+import dev.panelinha.aonline.exceptions.UserAlreadyExistsException
 import dev.panelinha.aonline.modules.JwtConfig
 import dev.panelinha.aonline.services.AuthService
 import dev.panelinha.aonline.utils.ApiPaths
@@ -25,8 +28,10 @@ fun Route.authRouting() {
                 user.credenciaisAO?.chave = it.chave ?: "nokey"
                 val token = JwtConfig.generateToken(user)
                 call.respond(ResponseLoginDTO(token))
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.Forbidden, e)
+            } catch (e: InvalideCredentialsException) {
+                call.respond(HttpStatusCode.Forbidden, ExceptionDTO(e))
+            } catch (e: Exception){
+                call.respond(HttpStatusCode.InternalServerError, ExceptionDTO(e))
             }
         }
 
@@ -34,9 +39,11 @@ fun Route.authRouting() {
             try {
                 service.register(it)
                 call.respond(HttpStatusCode.Created)
-            } catch (e: Exception) {
-                println(e.printStackTrace())
-                call.respond(HttpStatusCode.Forbidden, e)
+            } catch (e: UserAlreadyExistsException) {
+
+                call.respond(HttpStatusCode.Forbidden, ExceptionDTO(e))
+            } catch (e: Exception){
+                call.respond(HttpStatusCode.InternalServerError, ExceptionDTO(e))
             }
         }
 
@@ -47,8 +54,10 @@ fun Route.authRouting() {
                     val user = call.principal<User>()!!
                     val apiToken = service.registerAlunoOnline(user, it)
                     call.respond(HttpStatusCode.Created, apiToken)
-                } catch (e: Exception) {
+                } catch (e: InvalidCredentialsAlunoOnlineException) {
                     call.respond(HttpStatusCode.Forbidden, e)
+                } catch (e: Exception){
+                    call.respond(HttpStatusCode.InternalServerError, ExceptionDTO(e))
                 }
             }
 
@@ -57,7 +66,7 @@ fun Route.authRouting() {
                     val user = call.principal<User>()!!
                     call.respond(HttpStatusCode.OK, UserDTO(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.Forbidden, e)
+                    call.respond(HttpStatusCode.Forbidden, ExceptionDTO(e))
                 }
             }
         }

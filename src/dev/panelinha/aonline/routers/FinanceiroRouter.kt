@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.routers
 
+import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.ExtratoDTO
 import dev.panelinha.aonline.modules.JwtConfig
@@ -27,7 +28,7 @@ fun Route.financeiroRouter() {
                     val extrato = service.extratoFin(user, it)
                     call.respond(HttpStatusCode.OK, extrato)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.Forbidden, e)
+                    call.respond(HttpStatusCode.Forbidden, ExceptionDTO("Não foi possivel recuperar o extrato financeiro"))
                 }
             }
         }

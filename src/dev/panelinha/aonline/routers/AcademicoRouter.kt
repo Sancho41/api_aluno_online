@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.routers
 
+import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.AcademicoService
 import dev.panelinha.aonline.utils.ApiPaths
@@ -26,7 +27,7 @@ fun Route.academicoRouting() {
                     val boletim = service.boletim(user)
                     call.respond(boletim)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível pegar o boletim"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar o boletim"))
                 }
             }
 
@@ -36,7 +37,7 @@ fun Route.academicoRouting() {
                     val horaAulas = service.horaAulas(user)
                     call.respond(horaAulas)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível resgatar os horários das aulas"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("não foi possível recuperar os horários das aulas"))
                 }
             }
         }

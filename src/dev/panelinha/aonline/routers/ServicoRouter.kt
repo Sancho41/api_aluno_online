@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.routers
 
+import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.ServicoService
 import dev.panelinha.aonline.utils.ApiPaths
@@ -27,7 +28,9 @@ fun Route.servicoRouting() {
 
                 } catch (e: Exception) {
 
-                    call.respond(HttpStatusCode.BadRequest ,mapOf("error" to "não foi possível pegar os agendamentos"))
+                    call.respond(HttpStatusCode.BadRequest ,
+                        ExceptionDTO("Não foi possivel recuperar os agendamentos")
+                    )
                 }
             }
         }

@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.routers
 
+import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.HistoricoService
 import dev.panelinha.aonline.utils.ApiPaths
@@ -22,7 +23,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>()!!
                     call.respond(service.disciplinasCursadas(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina cursada"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas cursadas"))
                 }
             }
 
@@ -32,7 +33,7 @@ fun Route.historicoRouting() {
                     val d = service.disciplinasMatriculadas(user)
                     call.respond(d)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina matriculada"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas matriculadas"))
                 }
             }
 
@@ -41,7 +42,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>()!!
                     call.respond(service.disciplinasPendentes(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina pendente"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas pendentes"))
                 }
             }
 
@@ -50,7 +51,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>()!!
                     call.respond(service.disciplinasComplementares(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina complementar"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas complementares"))
                 }
             }
 
@@ -59,7 +60,7 @@ fun Route.historicoRouting() {
                     val user = call.principal<User>()!!
                     call.respond(service.disciplinasForadaGrade(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma disciplina fora da grade"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas fora de grade"))
                 }
             }
         }

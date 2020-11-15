@@ -25,6 +25,6 @@ class AuthService {
             dao.updateAo(user)
             return ApiKeyDTO(chave)
         }
-        throw InvalidCredentialsAlunoOnlineException("Login failed.")
+        throw InvalidCredentialsAlunoOnlineException("Credenciais do Aluno Online invalida.")
     }
 }
