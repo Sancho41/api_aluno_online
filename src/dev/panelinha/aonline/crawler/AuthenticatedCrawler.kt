@@ -37,7 +37,7 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
         val regex = """(self.location.href = "logon.asp";)""".toRegex()
 
         if (regex.containsMatchIn(login.body()))
-            throw InvalidCredentialsAlunoOnlineException("Login failed.")
+            throw InvalidCredentialsAlunoOnlineException("Credenciais Aluno Online inválida.")
 
         return login.cookies()
     }
