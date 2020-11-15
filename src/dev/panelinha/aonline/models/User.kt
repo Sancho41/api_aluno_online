@@ -1,7 +1,7 @@
 package dev.panelinha.aonline.models
 
-import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import dev.panelinha.dev.panelinha.aonline.utils.AES
+import dev.panelinha.aonline.dtos.RegisterDTO
+import dev.panelinha.aonline.utils.AES
 import io.ktor.auth.Principal
 import io.ktor.utils.io.core.toByteArray
 import org.mindrot.jbcrypt.BCrypt

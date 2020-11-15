@@ -1,11 +1,11 @@
-package dev.panelinha.dev.panelinha.aonline.services
+package dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.dao.AuthDAO
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.AuthenticatedCrawler
-import dev.panelinha.dev.panelinha.aonline.dtos.*
-import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
-import dev.panelinha.dev.panelinha.aonline.utils.KeyGenerator
+import dev.panelinha.aonline.crawler.AuthenticatedCrawler
+import dev.panelinha.aonline.dtos.*
+import dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
+import dev.panelinha.aonline.utils.KeyGenerator
 
 class AuthService {
     private val dao = AuthDAO()

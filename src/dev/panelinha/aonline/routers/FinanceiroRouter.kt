@@ -1,10 +1,10 @@
-package dev.panelinha.dev.panelinha.aonline.routers
+package dev.panelinha.aonline.routers
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
-import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
-import dev.panelinha.dev.panelinha.aonline.services.FinanceiroService
-import dev.panelinha.dev.panelinha.aonline.utils.ApiPaths
+import dev.panelinha.aonline.dtos.ExtratoDTO
+import dev.panelinha.aonline.modules.JwtConfig
+import dev.panelinha.aonline.services.FinanceiroService
+import dev.panelinha.aonline.utils.ApiPaths
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal

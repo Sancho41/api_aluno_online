@@ -1,9 +1,9 @@
-package dev.panelinha.dev.panelinha.aonline.services
+package dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.FinanceiroCrawler
-import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.FinanceiroDTO
+import dev.panelinha.aonline.crawler.FinanceiroCrawler
+import dev.panelinha.aonline.dtos.ExtratoDTO
+import dev.panelinha.aonline.dtos.FinanceiroDTO
 
 class FinanceiroService {
 

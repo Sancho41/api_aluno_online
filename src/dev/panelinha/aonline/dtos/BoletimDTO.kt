@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.dtos
+package dev.panelinha.aonline.dtos
 
 class BoletimDTO(disciplinas: List<List<String>>) {
     class Disciplina(

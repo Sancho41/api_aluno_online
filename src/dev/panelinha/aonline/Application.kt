@@ -4,8 +4,8 @@ import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.Logger
 import ch.qos.logback.classic.LoggerContext
 import dev.panelinha.aonline.dao.AuthDAO
-import dev.panelinha.dev.panelinha.aonline.modules.JwtConfig
-import dev.panelinha.dev.panelinha.aonline.routers.*
+import dev.panelinha.aonline.modules.JwtConfig
+import dev.panelinha.aonline.routers.*
 import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.call
 import io.ktor.application.install

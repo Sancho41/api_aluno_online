@@ -2,9 +2,9 @@ package dev.panelinha.aonline.dao
 
 import com.mongodb.MongoWriteException
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.LoginUserDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.RegisterDTO
-import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
+import dev.panelinha.aonline.dtos.LoginUserDTO
+import dev.panelinha.aonline.dtos.RegisterDTO
+import dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.litote.kmongo.*

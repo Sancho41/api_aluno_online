@@ -1,7 +1,7 @@
-package dev.panelinha.dev.panelinha.aonline.crawler
+package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
+import dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
 
 class DisciplinasPendentesCrawler(user: User): AuthenticatedCrawler(user) {
 

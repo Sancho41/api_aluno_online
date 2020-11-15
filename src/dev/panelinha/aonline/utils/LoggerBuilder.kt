@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.utils
+package dev.panelinha.aonline.utils
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

@@ -1,12 +1,12 @@
-package dev.panelinha.dev.panelinha.aonline
+package dev.panelinha.aonline
 
 import com.google.gson.GsonBuilder
 import dev.panelinha.aonline.crawler.DisciplinasForadaGradeCrawler
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.AgendamentoCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
-import dev.panelinha.dev.panelinha.aonline.dtos.AgendamentoDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
+import dev.panelinha.aonline.crawler.AgendamentoCrawler
+import dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
+import dev.panelinha.aonline.dtos.AgendamentoDTO
+import dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
 
 fun main() {
     val user = User()
