@@ -1,7 +1,7 @@
-package dev.panelinha.dev.panelinha.aonline.crawler
+package dev.panelinha.aonline.crawler
 
-import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.AgendamentoDTO
+import dev.panelinha.aonline.dtos.ExtratoDTO
+import dev.panelinha.aonline.dtos.AgendamentoDTO
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 

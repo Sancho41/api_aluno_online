@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.dtos
+package dev.panelinha.aonline.dtos
 
 import dev.panelinha.aonline.utils.FloatParser
 import java.text.DecimalFormat

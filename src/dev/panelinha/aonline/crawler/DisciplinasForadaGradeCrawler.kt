@@ -2,7 +2,7 @@ package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.dtos.DisciplinasForadaGradeDTO
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.AuthenticatedCrawler
+import dev.panelinha.aonline.crawler.AuthenticatedCrawler
 
 class DisciplinasForadaGradeCrawler(user: User): AuthenticatedCrawler(user) {
 

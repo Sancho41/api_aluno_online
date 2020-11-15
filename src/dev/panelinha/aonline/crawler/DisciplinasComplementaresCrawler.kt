@@ -1,7 +1,7 @@
-package dev.panelinha.dev.panelinha.aonline.crawler
+package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
+import dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
 
 class DisciplinasComplementaresCrawler(user: User) : AuthenticatedCrawler(user) {
     override fun scrap(): DisciplinasComplementaresDTO {

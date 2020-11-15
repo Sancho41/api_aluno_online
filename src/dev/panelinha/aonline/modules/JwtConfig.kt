@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.modules
+package dev.panelinha.aonline.modules
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier

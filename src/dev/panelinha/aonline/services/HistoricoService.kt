@@ -1,16 +1,16 @@
-package dev.panelinha.dev.panelinha.aonline.services
+package dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.crawler.DisciplinasForadaGradeCrawler
 import dev.panelinha.aonline.dtos.DisciplinasForadaGradeDTO
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasMatriculadasCrawler
-import dev.panelinha.dev.panelinha.aonline.crawler.DisciplinasPendentesCrawler
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasMatriculadasDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
+import dev.panelinha.aonline.crawler.DisciplinasComplementaresCrawler
+import dev.panelinha.aonline.crawler.DisciplinasCursadasCrawler
+import dev.panelinha.aonline.crawler.DisciplinasMatriculadasCrawler
+import dev.panelinha.aonline.crawler.DisciplinasPendentesCrawler
+import dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
+import dev.panelinha.aonline.dtos.DisciplinasCursadasDTO
+import dev.panelinha.aonline.dtos.DisciplinasMatriculadasDTO
+import dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
 
 class HistoricoService {
     fun disciplinasCursadas(user: User): DisciplinasCursadasDTO {

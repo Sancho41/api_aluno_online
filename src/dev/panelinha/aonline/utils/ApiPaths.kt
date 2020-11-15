@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.utils
+package dev.panelinha.aonline.utils
 
 object ApiPaths {
     const val AUTH = "/api/auth"

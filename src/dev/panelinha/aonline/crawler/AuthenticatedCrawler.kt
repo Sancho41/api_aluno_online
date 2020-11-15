@@ -1,8 +1,8 @@
-package dev.panelinha.dev.panelinha.aonline.crawler
+package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
-import dev.panelinha.dev.panelinha.aonline.utils.KeyGenerator
+import dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
+import dev.panelinha.aonline.utils.KeyGenerator
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 
@@ -37,7 +37,7 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
         val regex = """(self.location.href = "logon.asp";)""".toRegex()
 
         if (regex.containsMatchIn(login.body()))
-            throw InvalidCredentialsAlunoOnlineException("Login failed.")
+            throw InvalidCredentialsAlunoOnlineException("Credenciais Aluno Online inválida.")
 
         return login.cookies()
     }

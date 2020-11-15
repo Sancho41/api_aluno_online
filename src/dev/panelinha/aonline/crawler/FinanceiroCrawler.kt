@@ -1,8 +1,8 @@
-package dev.panelinha.dev.panelinha.aonline.crawler
+package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.dev.panelinha.aonline.dtos.ExtratoDTO
-import dev.panelinha.dev.panelinha.aonline.dtos.FinanceiroDTO
+import dev.panelinha.aonline.dtos.ExtratoDTO
+import dev.panelinha.aonline.dtos.FinanceiroDTO
 
 class FinanceiroCrawler(user: User): AuthenticatedCrawler(user) {
     override fun scrap(data: ExtratoDTO): FinanceiroDTO{

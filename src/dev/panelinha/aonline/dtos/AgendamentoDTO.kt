@@ -1,4 +1,4 @@
-package dev.panelinha.dev.panelinha.aonline.dtos
+package dev.panelinha.aonline.dtos
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

@@ -1,9 +1,10 @@
-package dev.panelinha.dev.panelinha.aonline.routers
+package dev.panelinha.aonline.routers
 
+import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.AcademicoService
-import dev.panelinha.dev.panelinha.aonline.utils.ApiPaths
-import dev.panelinha.dev.panelinha.aonline.utils.LoggerBuilder
+import dev.panelinha.aonline.utils.ApiPaths
+import dev.panelinha.aonline.utils.LoggerBuilder
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
@@ -26,16 +27,7 @@ fun Route.academicoRouting() {
                     val boletim = service.boletim(user)
                     call.respond(boletim)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível pegar o boletim"))
-                }
-            }
-
-            get("/atividade_complementar") {
-                try {
-//            val atvCompl = service.atvCompl()
-//            call.respond(atvCompl)
-                } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível encontrar nenhuma atividade complementar"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar o boletim"))
                 }
             }
 
@@ -45,7 +37,7 @@ fun Route.academicoRouting() {
                     val horaAulas = service.horaAulas(user)
                     call.respond(horaAulas)
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "não foi possível resgatar os horários das aulas"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("não foi possível recuperar os horários das aulas"))
                 }
             }
         }
