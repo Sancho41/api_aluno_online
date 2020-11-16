@@ -1,5 +1,5 @@
 # Api para o Aluno Online
-[Link para a documentação da API](https://documenter.getpostman.com/view/10262250/TVRd9rHt)
+[Link para a documentação da API](https://documenter.getpostman.com/view/10262250/TVep97qn)
 
 ## Objetivo
 Este trabalho tem como objetivo a criação de uma api para o sistema interno de alunos do IESB, para automatizações e facilitar acesso aos dados. Utilizamos Webscraping para a retirada de informações do sistema.
