@@ -17,7 +17,7 @@ class BoletimDTO(disciplinas: List<List<String>>) {
 
     init {
         this.disciplinas = disciplinas.map {
-            val offset: Int = if (it.size > 11) 0  else 6
+            val offset: Int = if (it.size > 11) 0  else 5
             Disciplina(
                     it[0], // Código
                     it[1], // Disciplina
