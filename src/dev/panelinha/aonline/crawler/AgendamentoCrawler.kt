@@ -23,8 +23,6 @@ class AgendamentoCrawler(user: User): AuthenticatedCrawler(user) {
 
         val agendamentoDTO = AgendamentoDTO()
 
-        //println(document)
-
         document.select(
             ".classdatatable > tbody > tr"
         ).forEach { elemento ->
