@@ -15,24 +15,29 @@ Este trabalho tem como objetivo a criação de uma api para o sistema interno de
 ### Acadêmico
 - [X] Boletim
 - [X] Horário de Aulas
+- [X] Disciplinas Matriculadas (Email)
 
 ### Serviços
 - [X] Histórico de agendamentos
+- [X] Serviços Solicitados
 
 ### Histórico Acadêmico
 - [X] Disciplinas Cursadas
 - [X] Disciplinas Matriculadas
-- [ ] Disciplinas Cursadas
-- [ ] Disciplinas Fora da Grade
-- [ ] Atividades Complementares
+- [X] Disciplinas Pendentes
+- [X] Atividades Complementares 
+- [X] Disciplinas Fora da Grade
     
 ### Financeiro
 - [X] Extrato Financeiro (Período)
 - [ ] Impressão de Boleto
 
+### Web
+- [X] Site para visualização da API
+
 ---
 
 # Outros Recursos
 - [ ] Rotas de administrador
-    - [ ] Gerênciar usuários 
-- [ ] Criptografia de senha no banco de dados
+    - [X] Gerênciar usuários 
+- [X] Criptografia de senha no banco de dados
