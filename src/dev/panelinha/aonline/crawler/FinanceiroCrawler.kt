@@ -1,15 +1,13 @@
 package dev.panelinha.aonline.crawler
 
 import dev.panelinha.aonline.models.User
-import dev.panelinha.aonline.dtos.ExtratoDTO
 import dev.panelinha.aonline.dtos.FinanceiroDTO
 
-class FinanceiroCrawler(user: User): AuthenticatedCrawler(user) {
-    override fun scrap(data: ExtratoDTO): FinanceiroDTO{
+class FinanceiroCrawler(user: User, override val data: Map<String, String>): AuthenticatedCrawler(user) {
+    override fun scrap(): FinanceiroDTO{
         val crawler = this.crawler("http://online.iesb.br/aonline/extrato_financeiro.asp")
         val document = crawler
-                .data("dt_ini", data.dataIni)
-                .data("dt_fim", data.dataFim)
+                .data(data)
                 .post()
         val financeiroDTO = FinanceiroDTO()
 

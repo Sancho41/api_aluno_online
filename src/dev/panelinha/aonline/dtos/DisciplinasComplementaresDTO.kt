@@ -2,7 +2,7 @@ package dev.panelinha.aonline.dtos
 
 import dev.panelinha.aonline.utils.FloatParser
 
-class DisciplinasComplementaresDTO {
+class DisciplinasComplementaresDTO : DTO() {
     class Disciplina(
             val anoPer: String,
             val atividade: String,

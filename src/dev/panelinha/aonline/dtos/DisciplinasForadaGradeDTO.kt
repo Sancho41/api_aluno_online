@@ -2,7 +2,7 @@ package dev.panelinha.aonline.dtos
 
 import dev.panelinha.aonline.utils.FloatParser
 
-class DisciplinasForadaGradeDTO {
+class DisciplinasForadaGradeDTO : DTO() {
 
     class Disciplina(
 

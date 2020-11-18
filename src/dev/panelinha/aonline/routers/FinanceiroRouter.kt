@@ -2,8 +2,7 @@ package dev.panelinha.aonline.routers
 
 import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
-import dev.panelinha.aonline.dtos.ExtratoDTO
-import dev.panelinha.aonline.modules.JwtConfig
+import dev.panelinha.aonline.dtos.DatasExtratoDTO
 import dev.panelinha.aonline.services.FinanceiroService
 import dev.panelinha.aonline.utils.ApiPaths
 import io.ktor.application.call
@@ -22,7 +21,7 @@ fun Route.financeiroRouter() {
 
 
         route(ApiPaths.FINANCEIRO) {
-            post<ExtratoDTO>("/extrato-financeiro") {
+            post<DatasExtratoDTO>("/extrato-financeiro") {
                 try {
                     val user = call.principal<User>()!!
                     val extrato = service.extratoFin(user, it)

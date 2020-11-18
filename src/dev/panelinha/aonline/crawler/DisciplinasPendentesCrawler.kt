@@ -4,7 +4,7 @@ import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.DisciplinasPendentesDTO
 
 class DisciplinasPendentesCrawler(user: User): AuthenticatedCrawler(user) {
-
+    override val data: Map<String, String> = mapOf()
     override fun scrap(): DisciplinasPendentesDTO {
 
         val crawler = this.crawler("http://online.iesb.br/aonline/historico.asp")

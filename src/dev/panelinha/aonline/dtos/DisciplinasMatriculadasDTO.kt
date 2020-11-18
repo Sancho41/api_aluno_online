@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class DisciplinasMatriculadasDTO {
+class DisciplinasMatriculadasDTO : DTO() {
 
     class DisciplinaM(
             val cod: String,

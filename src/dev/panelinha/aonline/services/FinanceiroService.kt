@@ -2,12 +2,12 @@ package dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.crawler.FinanceiroCrawler
-import dev.panelinha.aonline.dtos.ExtratoDTO
+import dev.panelinha.aonline.dtos.DatasExtratoDTO
 import dev.panelinha.aonline.dtos.FinanceiroDTO
 
 class FinanceiroService {
 
-    fun extratoFin(user: User, extratoDTO: ExtratoDTO): FinanceiroDTO {
-        return FinanceiroCrawler(user).scrap(extratoDTO);
+    fun extratoFin(user: User, datasExtratoDTO: DatasExtratoDTO): FinanceiroDTO {
+        return FinanceiroCrawler(user, datasExtratoDTO.toMap()).scrap();
     }
 }

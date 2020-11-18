@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class BoletimDTO(disciplinas: List<List<String>>) {
+class BoletimDTO(disciplinas: List<List<String>>) : DTO() {
     class Disciplina(
         val codigo: String,
         val nome: String,

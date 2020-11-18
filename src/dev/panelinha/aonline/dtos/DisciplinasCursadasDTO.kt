@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class DisciplinasCursadasDTO {
+class DisciplinasCursadasDTO : DTO() {
     class Disciplina(
         val ano: String,
         val codigo: String,

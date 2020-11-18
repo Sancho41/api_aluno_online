@@ -4,7 +4,7 @@ import dev.panelinha.aonline.utils.FloatParser
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
-class FinanceiroDTO {
+class FinanceiroDTO : DTO() {
     class Parcelas(
             val vencimento: String,
             val anoMes: String,

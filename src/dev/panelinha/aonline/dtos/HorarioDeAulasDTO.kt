@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class HorarioDeAulasDTO {
+class HorarioDeAulasDTO : DTO() {
     class Disciplina (
         val materia: String,
         val turma: String,

@@ -1,5 +1,6 @@
 package dev.panelinha.aonline.crawler
 
+import dev.panelinha.aonline.dtos.DTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.exceptions.InvalidCredentialsAlunoOnlineException
 import dev.panelinha.aonline.utils.KeyGenerator
@@ -7,6 +8,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 open class AuthenticatedCrawler(val user: User) : ICrawler {
+    override val data: Map<String, String> = mapOf()
     private val authResourceUri = "http://online.iesb.br/aonline/middle_logon.asp"
     private val cookies: Map<String, String> = this.getCookies()
 
@@ -43,4 +45,8 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
     }
 
     override fun crawler(url: String): Connection = Jsoup.connect(url).cookies(cookies)
+
+    override fun scrap(): DTO {
+        throw NotImplementedError()
+    }
 }

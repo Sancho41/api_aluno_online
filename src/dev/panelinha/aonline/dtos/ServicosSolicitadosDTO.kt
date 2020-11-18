@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class ServicosSolicitadosDTO {
+class ServicosSolicitadosDTO : DTO() {
     class Servicos(
             val numero: String,
             val servico: String,

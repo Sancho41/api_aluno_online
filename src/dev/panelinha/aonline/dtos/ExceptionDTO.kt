@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class ExceptionDTO {
+class ExceptionDTO : DTO {
 
     var message: String
 

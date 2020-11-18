@@ -1,9 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-
-class AgendamentoDTO {
+class AgendamentoDTO : DTO() {
     class Agendamento(
         val numero: String,
         val motivoAtendimento: String,
@@ -11,10 +8,10 @@ class AgendamentoDTO {
         val situacao: String
     )
 
-    val Agendamentos: MutableList<Agendamento> = mutableListOf()
+    val agendamentos: MutableList<Agendamento> = mutableListOf()
 
     fun addAgendamentos(dados: List<String>){
-        Agendamentos.add(
+        agendamentos.add(
             Agendamento(
                 dados[0],
                 dados[1],

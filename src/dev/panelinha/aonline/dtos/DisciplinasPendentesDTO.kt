@@ -1,6 +1,6 @@
 package dev.panelinha.aonline.dtos
 
-class DisciplinasPendentesDTO {
+class DisciplinasPendentesDTO : DTO() {
 
     class DisciplinaPendente(
 
