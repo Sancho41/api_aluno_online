@@ -46,12 +46,12 @@ fun Route.historicoRouting() {
                 }
             }
 
-            get("disciplinas-complementares") {
+            get("atividades-complementares") {
                 try {
                     val user = call.principal<User>()!!
-                    call.respond(service.disciplinasComplementares(user))
+                    call.respond(service.atividadesComplementares(user))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as disciplinas complementares"))
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("Não foi possivel recuperar as atividades complementares"))
                 }
             }
 

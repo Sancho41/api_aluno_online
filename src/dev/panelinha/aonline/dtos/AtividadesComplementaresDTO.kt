@@ -2,7 +2,7 @@ package dev.panelinha.aonline.dtos
 
 import dev.panelinha.aonline.utils.FloatParser
 
-class DisciplinasComplementaresDTO : DTO() {
+class AtividadesComplementaresDTO : DTO() {
     class Disciplina(
             val anoPer: String,
             val atividade: String,
@@ -11,10 +11,10 @@ class DisciplinasComplementaresDTO : DTO() {
             val cargaHorariaCumprida: Float
     )
 
-    val disciplinasComplementares: MutableList<Disciplina> = mutableListOf()
+    val atividadesComplementares: MutableList<Disciplina> = mutableListOf()
 
     fun addDisciplina(dados: List<String>) {
-        disciplinasComplementares.add(
+        atividadesComplementares.add(
                 Disciplina(
                         dados[0],
                         dados[1],
