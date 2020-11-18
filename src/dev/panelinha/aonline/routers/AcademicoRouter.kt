@@ -40,6 +40,16 @@ fun Route.academicoRouting() {
                     call.respond(HttpStatusCode.BadRequest, ExceptionDTO("não foi possível recuperar os horários das aulas"))
                 }
             }
+
+            get("/disciplinas-matriculadas") {
+                try {
+                    val user = call.principal<User>()!!
+                    val horaAulas = service.disciplinasMatriculadasDM(user)
+                    call.respond(horaAulas)
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest, ExceptionDTO("não foi possível recuperar as disciplinas matriculadas"))
+                }
+            }
         }
     }
 }

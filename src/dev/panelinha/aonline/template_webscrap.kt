@@ -8,9 +8,9 @@ import dev.panelinha.aonline.dtos.DisciplinasComplementaresDTO
 
 fun main() {
     val user = User()
-    user.credenciaisAO = User.CredenciaisAO("1912130015", "27062001");
+    user.credenciaisAO = User.CredenciaisAO("", "");
     user.credenciaisAO?.criptografarSenha()
-    val crawler = ServicosSolicitadosCrawler(user)
+    val crawler = DisciplinasMatriculadasDMCrawler(user)
     val retorno = crawler.scrap()
     val gson = GsonBuilder().setPrettyPrinting().create()
     println(gson.toJson(retorno))
