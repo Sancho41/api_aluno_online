@@ -33,6 +33,20 @@ fun Route.servicoRouting() {
                     )
                 }
             }
+
+            get("/servicos-solicitados") {
+                try {
+                    val user = call.principal<User>()!!
+                    val servicosSolicitados = service.servicosSolicitados(user)
+                    call.respond(servicosSolicitados)
+
+                } catch (e: Exception) {
+
+                    call.respond(HttpStatusCode.BadRequest ,
+                            ExceptionDTO("Não foi possivel recuperar os serviços solicitados")
+                    )
+                }
+            }
         }
     }
 }
