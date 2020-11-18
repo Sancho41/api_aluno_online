@@ -2,7 +2,7 @@ package dev.panelinha.aonline.services
 
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.crawler.BoletimCrawler
-import dev.panelinha.aonline.crawler.DisciplinasMatriculadasDMCrawler
+import dev.panelinha.aonline.crawler.DisciplinasMatriculadasAcademicoCrawler
 import dev.panelinha.aonline.crawler.HorarioDeAulasCrawler
 import dev.panelinha.aonline.dtos.BoletimDTO
 import dev.panelinha.aonline.dtos.DisciplinasMatriculadasDMDTO
@@ -17,7 +17,7 @@ class AcademicoService {
         return HorarioDeAulasCrawler(user).scrap()
     }
 
-    fun disciplinasMatriculadasDM(user: User): DisciplinasMatriculadasDMDTO {
-        return DisciplinasMatriculadasDMCrawler(user).scrap()
+    fun disciplinasMatriculadasAcademico(user: User): DisciplinasMatriculadasDMDTO {
+        return DisciplinasMatriculadasAcademicoCrawler(user).scrap()
     }
 }

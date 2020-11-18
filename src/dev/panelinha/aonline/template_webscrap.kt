@@ -10,7 +10,7 @@ fun main() {
     val user = User()
     user.credenciaisAO = User.CredenciaisAO("", "");
     user.credenciaisAO?.criptografarSenha()
-    val crawler = DisciplinasMatriculadasDMCrawler(user)
+    val crawler = ServicosSolicitadosCrawler(user)
     val retorno = crawler.scrap()
     val gson = GsonBuilder().setPrettyPrinting().create()
     println(gson.toJson(retorno))

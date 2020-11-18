@@ -4,7 +4,6 @@ import dev.panelinha.aonline.dtos.ExceptionDTO
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.services.AcademicoService
 import dev.panelinha.aonline.utils.ApiPaths
-import dev.panelinha.aonline.utils.LoggerBuilder
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.principal
@@ -44,7 +43,7 @@ fun Route.academicoRouting() {
             get("/disciplinas-matriculadas") {
                 try {
                     val user = call.principal<User>()!!
-                    val horaAulas = service.disciplinasMatriculadasDM(user)
+                    val horaAulas = service.disciplinasMatriculadasAcademico(user)
                     call.respond(horaAulas)
                 } catch (e: Exception) {
                     call.respond(HttpStatusCode.BadRequest, ExceptionDTO("não foi possível recuperar as disciplinas matriculadas"))
