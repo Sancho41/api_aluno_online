@@ -3,7 +3,7 @@ package dev.panelinha.aonline.crawler
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.FinanceiroDTO
 
-class FinanceiroCrawler(user: User, override val data: Map<String, String>): AuthenticatedCrawler(user) {
+class FinanceiroCrawler(user: User, val data: Map<String, String>): AuthenticatedCrawler(user), IScraper  {
     override fun scrap(): FinanceiroDTO{
         val crawler = this.crawler("http://online.iesb.br/aonline/extrato_financeiro.asp")
         val document = crawler

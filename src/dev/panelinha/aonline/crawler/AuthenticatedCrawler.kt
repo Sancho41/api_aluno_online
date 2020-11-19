@@ -8,7 +8,6 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 open class AuthenticatedCrawler(val user: User) : ICrawler {
-    override val data: Map<String, String> = mapOf()
     private val authResourceUri = "http://online.iesb.br/aonline/middle_logon.asp"
     private val cookies: Map<String, String> = this.getCookies()
 
