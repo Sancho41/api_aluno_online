@@ -44,8 +44,4 @@ open class AuthenticatedCrawler(val user: User) : ICrawler {
     }
 
     override fun crawler(url: String): Connection = Jsoup.connect(url).cookies(cookies)
-
-    override fun scrap(): DTO {
-        throw NotImplementedError()
-    }
 }
