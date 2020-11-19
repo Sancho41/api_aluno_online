@@ -3,7 +3,7 @@ package dev.panelinha.aonline.crawler
 import dev.panelinha.aonline.dtos.ServicosSolicitadosDTO
 import dev.panelinha.aonline.models.User
 
-class ServicosSolicitadosCrawler(user: User) :AuthenticatedCrawler(user) {
+class ServicosSolicitadosCrawler(user: User) :AuthenticatedCrawler(user) , IScraper {
     override fun scrap(): ServicosSolicitadosDTO {
         val crawler = this.crawler("http://online.iesb.br/aonline/servicos_solicit.asp")
         val document = crawler.get()

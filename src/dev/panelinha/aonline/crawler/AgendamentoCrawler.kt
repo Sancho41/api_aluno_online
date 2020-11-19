@@ -3,7 +3,7 @@ package dev.panelinha.aonline.crawler
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.AgendamentoDTO
 
-class AgendamentoCrawler(user: User): AuthenticatedCrawler(user) {
+class AgendamentoCrawler(user: User): AuthenticatedCrawler(user), IScraper {
     override fun scrap(): AgendamentoDTO {
         val crawlerCodigo = this.crawler("http://online.iesb.br/aonline/ie_agendamento_fies.asp").get()
         val regex = Regex("(?:codigo: ')([^']+)(?:')")

@@ -6,7 +6,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.nio.charset.Charset
 
-class BoletimCrawler(user: User) : AuthenticatedCrawler(user) {
+class BoletimCrawler(user: User) : AuthenticatedCrawler(user), IScraper {
     override fun scrap(): BoletimDTO {
         val crawler = crawler("http://online.iesb.br/aonline/notas_freq_boletim_iframe.asp")
                 .method(Connection.Method.GET)

@@ -3,7 +3,7 @@ package dev.panelinha.aonline.crawler
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.DisciplinasMatriculadasDTO
 
-class DisciplinasMatriculadasCrawler(user: User) : AuthenticatedCrawler(user) {
+class DisciplinasMatriculadasCrawler(user: User) : AuthenticatedCrawler(user), IScraper  {
     override fun scrap(): DisciplinasMatriculadasDTO{
         val crawler = this.crawler("http://online.iesb.br/aonline/historico.asp")
         val document = crawler.get()

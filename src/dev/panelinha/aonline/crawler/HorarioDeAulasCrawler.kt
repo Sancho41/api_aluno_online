@@ -3,7 +3,7 @@ package dev.panelinha.aonline.crawler
 import dev.panelinha.aonline.models.User
 import dev.panelinha.aonline.dtos.HorarioDeAulasDTO
 
-class HorarioDeAulasCrawler(user: User) : AuthenticatedCrawler(user) {
+class HorarioDeAulasCrawler(user: User) : AuthenticatedCrawler(user), IScraper  {
     override fun scrap(): HorarioDeAulasDTO {
         val crawler = crawler("http://online.iesb.br/aonline/horario.asp")
         val documento = crawler.get()
